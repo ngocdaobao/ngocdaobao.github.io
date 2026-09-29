@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bao-Ngoc Dao</title>
+    <meta name="description" content="Bao-Ngoc Dao — Computer Science student at HUST and Research Assistant at CAIR, VinUniversity. Continual learning, parameter-efficient fine-tuning, mixture-of-experts, and robot learning.">
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E%F0%9F%8C%B8%3C/text%3E%3C/svg%3E">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,500&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- falling sakura: one layer behind the content, a few larger petals in front -->
+    <canvas id="sky-back" class="sky" aria-hidden="true"></canvas>
+    <canvas id="sky-front" class="sky sky-front" aria-hidden="true"></canvas>
+
+    <!-- crescent moon, like the one on the cherry-blossom card -->
+    <svg class="moon" viewBox="0 0 100 100" aria-hidden="true">
+        <defs>
+            <radialGradient id="moonGlow" cx="50%" cy="50%" r="50%">
+                <stop offset="0" stop-color="#fff6d8" stop-opacity=".55"/>
+                <stop offset="1" stop-color="#fff6d8" stop-opacity="0"/>
+            </radialGradient>
+            <mask id="moonCut">
+                <rect width="100" height="100" fill="#fff"/>
+                <circle cx="62" cy="40" r="26" fill="#000"/>
+            </mask>
+        </defs>
+        <circle cx="50" cy="50" r="48" fill="url(#moonGlow)"/>
+        <circle cx="50" cy="50" r="28" fill="#f3e3ae" mask="url(#moonCut)"/>
+    </svg>
+
+    <div class="side-caption" aria-hidden="true">Bao-Ngoc Dao &nbsp;·&nbsp; Cherry Blossom</div>
+
+    <main class="page">
+        <header class="profile-header">
+            <div class="profile-left glass">
+                <svg class="sakura-frame" viewBox="0 0 200 200" role="img" aria-label="Bao-Ngoc Dao">
+                    <defs>
+                        <path id="sakuraShape" d="M66.9 54.5 C43.9 33.1 57.4 8.6 84.8 4.2 L100.0 15.6 L115.2 4.2 C142.6 8.6 156.1 33.1 133.1 54.5 C146.3 26.0 173.8 31.2 186.4 56.0 L180.3 73.9 L195.8 84.8 C200.1 112.3 180.9 132.7 153.5 117.4 C184.7 121.1 188.2 148.9 168.6 168.6 L149.6 168.3 L144.0 186.4 C119.2 199.0 93.9 187.1 100.0 156.3 C106.1 187.1 80.8 199.0 56.0 186.4 L50.4 168.3 L31.4 168.6 C11.8 148.9 15.3 121.1 46.5 117.4 C19.1 132.7 -0.1 112.3 4.2 84.8 L19.7 73.9 L13.6 56.0 C26.2 31.2 53.7 26.0 66.9 54.5 Z"/>
+                        <clipPath id="sakuraClip"><use href="#sakuraShape"/></clipPath>
+                        <linearGradient id="frameFill" x1="0" y1="0" x2="0.4" y2="1">
+                            <stop offset="0" stop-color="#e3e8f0"/>
+                            <stop offset="0.55" stop-color="#dfe3ee"/>
+                            <stop offset="1" stop-color="#f6d3de"/>
+                        </linearGradient>
+                    </defs>
+                    <use href="#sakuraShape" fill="url(#frameFill)"/>
+                    <!-- shown only if images/profile.jpg is missing -->
+                    <text x="100" y="116" text-anchor="middle" class="frame-initials">BN</text>
+                    <image href="images/profile.jpg" onerror="this.remove()" x="0" y="0" width="200" height="200" preserveAspectRatio="xMidYMid slice" clip-path="url(#sakuraClip)"/>
+                    <use href="#sakuraShape" fill="none" stroke="#ffffff" stroke-opacity=".9" stroke-width="3"/>
+                </svg>
+
+                <p class="bio">
+                    <strong class="name">Bao-Ngoc Dao</strong>
+                    <span class="name-sub">Đào Bảo Ngọc</span>
+                </p>
+
+                <ul class="contact-list">
+                    <li><a class="email" href="mailto:dbaongoc2312@gmail.com"><i class="fas fa-envelope"></i> dbaongoc2312[@at@]gmail[.dot.]com</a></li>
+                    <li><a href="https://scholar.google.com/citations?user=7uXidMkAAAAJ&hl=en" target="_blank" rel="noopener"><i class="fas fa-graduation-cap"></i> Google Scholar</a></li>
+                    <li><a href="https://github.com/ngocdaobao" target="_blank" rel="noopener"><i class="fab fa-github"></i> GitHub</a></li>
+                    <!-- TODO: replace with your LinkedIn profile URL -->
+                    <li><a href="https://www.linkedin.com/" target="_blank" rel="noopener"><i class="fab fa-linkedin"></i> LinkedIn</a></li>
+                    <li><a href="./cv.pdf" target="_blank" rel="noopener"><i class="fas fa-file"></i> CV</a></li>
+                </ul>
+            </div>
+
+            <div class="bio-text glass">
+                <p>
+                    I am an <strong>undergraduate student in Computer Science</strong> at
+                    <a href="https://hust.edu.vn/" target="_blank" rel="noopener">Hanoi University of Science and Technology (HUST)</a>
+                    and a <strong>Research Assistant</strong> at the
+                    <a href="https://cair.vinuni.edu.vn/" target="_blank" rel="noopener">Center for AI Research (CAIR), VinUniversity</a>,
+                    where I work on <strong>efficient Vision-Language-Action (VLA) models</strong> under the supervision of
+                    Duy M. H. Nguyen and Khoa D. Doan.
+                    My research focuses on developing scalable, efficient, and adaptive machine learning methods for
+                    <strong>continual learning</strong>, spanning both general machine learning and <strong>robot learning</strong>,
+                    and I am particularly interested in <strong>parameter-efficient fine-tuning</strong> and <strong>mixture-of-experts</strong>
+                    approaches that let models adapt to new tasks, domains, and environments with minimal computational and memory overhead.
+                </p>
+                <p>
+                    I am also a Research Student at the Machine Learning Lab, SOICT, HUST, advised by Linh Ngo Van,
+                    where I study continual information extraction, using efficient fine-tuning to fight catastrophic forgetting
+                    and promote knowledge transfer in pretrained models. Alongside research, I was an <strong>AI Engineer Intern</strong> at
+                    <a href="https://pixta.vn/" target="_blank" rel="noopener">PIXTA Vietnam</a>, building an AI headshot generator with FLUX and DreamBooth.
+                </p>
+                <p>
+                    Before university, I studied in the Special Mathematics class at Hoang Van Thu High School for Gifted Students, Hoa Binh,
+                    winning <strong>First Prize at the Provincial Mathematics Olympiad</strong> (2021, 2022) and qualifying for the
+                    Vietnamese Mathematics Olympiad twice.
+                </p>
+
+                <section class="latest-news">
+                    <h2>Latest News</h2>
+                    <ul class="news-scroll">
+                        <li><strong>June 2026:</strong> Our paper <a href="https://arxiv.org/abs/2606.14084" target="_blank" rel="noopener"><em>Self-Improving VLA Policies: Selected Diffusion Noise for Spurious-Robust Action Smoothing</em></a> is out on arXiv.</li>
+                        <li><strong>2026:</strong> <a href="https://arxiv.org/abs/2505.13944" target="_blank" rel="noopener">WAVE++</a> has been accepted to <em>Neurocomputing</em> 🌸</li>
+                        <li><strong>January 2026:</strong> <a href="https://arxiv.org/abs/2509.24483" target="_blank" rel="noopener">One-Prompt Strikes Back (SMoPE)</a> has been accepted to <strong>ICLR 2026</strong> 🎉🎉🎉</li>
+                        <li><strong>January 2026:</strong> Joined the <a href="https://cair.vinuni.edu.vn/" target="_blank" rel="noopener">Center for AI Research, VinUniversity</a> as a Research Assistant, working on efficient VLA.</li>
+                        <li><strong>September 2025:</strong> Started as an AI Engineer Intern at <a href="https://pixta.vn/" target="_blank" rel="noopener">PIXTA Vietnam</a>.</li>
+                        <li><strong>December 2023:</strong> Joined the Machine Learning Lab, SOICT, HUST as a Research Student.</li>
+                    </ul>
+                </section>
+            </div>
+        </header>
+
+        <section class="timeline-section glass">
+            <h2>Experience &amp; Education</h2>
+            <ol class="timeline">
+                <li class="tl-item tl-current" data-accent="sakura">
+                    <span class="tl-node"></span>
+                    <div class="tl-card">
+                        <span class="tl-date">Jan 2026 – Present</span>
+                        <span class="tl-org">Center for AI Research, VinUniversity</span>
+                        <span class="tl-role">Research Assistant</span>
+                        <span class="tl-note">Efficient VLA · Supervisors: Duy M. H. Nguyen, Khoa D. Doan</span>
+                        <span class="tl-loc"><i class="fas fa-location-dot"></i> Hanoi, Vietnam</span>
+                    </div>
+                </li>
+                <li class="tl-item" data-accent="gold">
+                    <span class="tl-node"></span>
+                    <div class="tl-card">
+                        <span class="tl-date">Sept 2025 – 2026</span>
+                        <span class="tl-org">PIXTA Vietnam</span>
+                        <span class="tl-role">AI Engineer Intern</span>
+                        <span class="tl-note">AI Headshot Generator · FLUX, DreamBooth, personalized image generation</span>
+                        <span class="tl-loc"><i class="fas fa-location-dot"></i> Hanoi, Vietnam</span>
+                    </div>
+                </li>
+                <li class="tl-item" data-accent="slate">
+                    <span class="tl-node"></span>
+                    <div class="tl-card">
+                        <span class="tl-date">Dec 2023 – 2026</span>
+                        <span class="tl-org">Machine Learning Lab, SOICT, HUST</span>
+                        <span class="tl-role">Research Student</span>
+                        <span class="tl-note">Continual Learning, PEFT · Supervisor: Linh Ngo Van</span>
+                        <span class="tl-loc"><i class="fas fa-location-dot"></i> Hanoi, Vietnam</span>
+                    </div>
+                </li>
+                <li class="tl-item" data-accent="sakura">
+                    <span class="tl-node"></span>
+                    <div class="tl-card">
+                        <span class="tl-date">2022 – Present</span>
+                        <span class="tl-org">Hanoi University of Science and Technology</span>
+                        <span class="tl-role">B.S. in Computer Science</span>
+                        <span class="tl-note">CPA 3.79 / 4.0</span>
+                        <span class="tl-loc"><i class="fas fa-location-dot"></i> Hanoi, Vietnam</span>
+                    </div>
+                </li>
+                <li class="tl-item tl-start" data-accent="mist">
+                    <span class="tl-node"></span>
+                    <div class="tl-card">
+                        <span class="tl-date">2019 – 2022</span>
+                        <span class="tl-org">Hoang Van Thu High School for Gifted Students</span>
+                        <span class="tl-role">Special Class in Mathematics</span>
+                        <span class="tl-note">First Prize, Provincial Math Olympiad 2021 &amp; 2022 · VMO qualifier</span>
+                        <span class="tl-loc"><i class="fas fa-location-dot"></i> Hoa Binh, Vietnam</span>
+                    </div>
+                </li>
+            </ol>
+        </section>
+
+        <section class="projects-section glass">
+            <h2>Publications</h2>
+            <p class="pub-hint">* denotes equal contribution</p>
+            <div class="projects-grid">
+
+                <!-- Publication 1 -->
+                <article class="publication">
+                    <a class="pub-thumb" href="https://arxiv.org/abs/2509.24483" target="_blank" rel="noopener" data-tone="sakura">
+                        <!-- to use a figure instead: <img src="./images/smope.png" alt="SMoPE"> -->
+                        <span class="thumb-venue">ICLR</span>
+                        <span class="thumb-year">2026</span>
+                    </a>
+                    <div class="pub-body">
+                        <a href="https://arxiv.org/abs/2509.24483" target="_blank" rel="noopener"><h3 class="pub-title">One-Prompt Strikes Back: Sparse Mixture of Experts for Prompt-based Continual Learning</h3></a>
+                        <p class="authors"><strong>Bao-Ngoc Dao*</strong>, Minh Le*, Huy Nguyen, Quyen Tran, Anh Nguyen, Nhat Ho</p>
+                        <p class="venue"><em>International Conference on Learning Representations (ICLR)</em>, 2026</p>
+                        <p class="pub-links">
+                            <a href="https://arxiv.org/abs/2509.24483" target="_blank" rel="noopener">[arXiv]</a>
+                            <span class="sep">/</span>
+                            <button type="button" class="bib-toggle" data-target="bib-smope">[bibtex]</button>
+                        </p>
+                        <div id="bib-smope" class="bibtex" hidden><pre><code>@inproceedings{dao2026oneprompt,
+  title     = {One-Prompt Strikes Back: Sparse Mixture of Experts for Prompt-based Continual Learning},
+  author    = {Dao, Bao-Ngoc and Le, Minh and Nguyen, Huy and Tran, Quyen and Nguyen, Anh and Ho, Nhat},
+  booktitle = {International Conference on Learning Representations (ICLR)},
+  year      = {2026},
+  eprint    = {2509.24483},
+  archivePrefix = {arXiv}
+}</code></pre></div>
+                    </div>
+                </article>
+
+                <!-- Publication 2 -->
+                <article class="publication">
+                    <a class="pub-thumb" href="https://arxiv.org/abs/2505.13944" target="_blank" rel="noopener" data-tone="slate">
+                        <span class="thumb-venue">Neuro&shy;computing</span>
+                        <span class="thumb-year">2026</span>
+                    </a>
+                    <div class="pub-body">
+                        <a href="https://arxiv.org/abs/2505.13944" target="_blank" rel="noopener"><h3 class="pub-title">WAVE++: Capturing Within-Task Variance for Continual Relation Extraction with Adaptive Prompting</h3></a>
+                        <p class="authors"><strong>Bao-Ngoc Dao</strong>, Quang Nguyen, Luyen Ngo Dinh, Minh Le, Nam Le, Linh Ngo Van</p>
+                        <p class="venue"><em>Neurocomputing</em>, 2026</p>
+                        <p class="pub-links">
+                            <a href="https://arxiv.org/abs/2505.13944" target="_blank" rel="noopener">[arXiv]</a>
+                            <span class="sep">/</span>
+                            <button type="button" class="bib-toggle" data-target="bib-wave">[bibtex]</button>
+                        </p>
+                        <div id="bib-wave" class="bibtex" hidden><pre><code>@article{dao2026wave,
+  title   = {WAVE++: Capturing Within-Task Variance for Continual Relation Extraction with Adaptive Prompting},
+  author  = {Dao, Bao-Ngoc and Nguyen, Quang and Dinh, Luyen Ngo and Le, Minh and Le, Nam and Van, Linh Ngo},
+  journal = {Neurocomputing},
+  year    = {2026},
+  eprint  = {2505.13944},
+  archivePrefix = {arXiv}
+}</code></pre></div>
+                    </div>
+                </article>
+
+                <!-- Publication 3 -->
+                <article class="publication">
+                    <a class="pub-thumb" href="https://arxiv.org/abs/2606.14084" target="_blank" rel="noopener" data-tone="gold">
+                        <span class="thumb-venue">arXiv</span>
+                        <span class="thumb-year">2026</span>
+                    </a>
+                    <div class="pub-body">
+                        <a href="https://arxiv.org/abs/2606.14084" target="_blank" rel="noopener"><h3 class="pub-title">Self-Improving VLA Policies: Selected Diffusion Noise for Spurious-Robust Action Smoothing</h3></a>
+                        <p class="authors">Duc Minh Nguyen, <strong>Bao-Ngoc Dao</strong>, Tung M. Luu, Binh Gia Nguyen, Vinh Tong, Anji Liu, Vu N. Duong, Dung D. Le, Daniel Sonntag, Trung Le, Ngan Le, Jan Peters, An Thai Le, Minh Nhat Vu, Mathias Niepert, Khoa D. Doan, Duy M. H. Nguyen, Vien Anh Ngo</p>
+                        <p class="venue"><em>Under review</em>, 2026</p>
+                        <p class="pub-links">
+                            <a href="https://arxiv.org/abs/2606.14084" target="_blank" rel="noopener">[arXiv]</a>
+                            <span class="sep">/</span>
+                            <button type="button" class="bib-toggle" data-target="bib-sdn">[bibtex]</button>
+                        </p>
+                        <div id="bib-sdn" class="bibtex" hidden><pre><code>@article{nguyen2026selfimproving,
+  title   = {Self-Improving VLA Policies: Selected Diffusion Noise for Spurious-Robust Action Smoothing},
+  author  = {Nguyen, Duc Minh and Dao, Bao-Ngoc and Luu, Tung M. and Nguyen, Binh Gia and Tong, Vinh and Liu, Anji and Duong, Vu N. and Le, Dung D. and Sonntag, Daniel and Le, Trung and Le, Ngan and Peters, Jan and Le, An Thai and Vu, Minh Nhat and Niepert, Mathias and Doan, Khoa D. and Nguyen, Duy M. H. and Ngo, Vien Anh},
+  journal = {arXiv preprint arXiv:2606.14084},
+  year    = {2026}
+}</code></pre></div>
+                    </div>
+                </article>
+
+            </div>
+        </section>
+
+        <footer class="site-footer">
+            <span>© 2026 Bao-Ngoc Dao</span>
+            <span class="dot">✿</span>
+            <span>Click anywhere for a breeze of petals</span>
+        </footer>
+    </main>
+
+    <button type="button" class="petal-toggle" aria-pressed="true" title="Pause falling petals">
+        <span class="petal-toggle-icon" aria-hidden="true">🌸</span>
+        <span class="petal-toggle-label">Petals on</span>
+    </button>
+
+    <script src="script.js"></script>
+</body>
+</html>
