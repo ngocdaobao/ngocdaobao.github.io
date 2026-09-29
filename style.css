@@ -24,6 +24,59 @@
     --shadow-hover: 0 16px 48px rgba(181, 90, 120, 0.22);
     --gradient: linear-gradient(120deg, #6c7c96, #b55a78 60%, #a8873a);
     --petal-gradient: linear-gradient(135deg, #f7d9e2, #e8a3b7);
+
+    --bg-base: #8796ad;
+    --caption: rgba(255, 255, 255, 0.72);
+    --hover-bg: rgba(247, 217, 226, 0.55);
+    --pulse: rgba(232, 163, 183, 0.5);
+    --bullet-2: linear-gradient(135deg, #e4e9f1, #a7b4c6);
+    --bullet-3: linear-gradient(135deg, #f6ebc6, #e3cd8c);
+    --frame-a: #e3e8f0;
+    --frame-b: #dfe3ee;
+    --frame-c: #f6d3de;
+    --thumb-sakura: linear-gradient(160deg, #9aa8bd 0%, #c7a5b9 70%, #e8a3b7 100%);
+    --thumb-slate: linear-gradient(160deg, #8796ad, #6c7c96);
+    --thumb-gold: linear-gradient(160deg, #7a8aa3 0%, #a7a79c 70%, #d7c27f 100%);
+}
+
+/* Summer daylight: sunshine over a green garden, with marigold and sunflower accents */
+:root[data-theme="day"] {
+    --night: #3f7d4a;
+    --slate: #6fae6a;
+    --dusk: #a9d18e;
+    --mist: #e6f2dc;
+    --frost: #fbfdf6;
+    --petal: #fff3c4;
+    --sakura: #f4a259;
+    --sakura-deep: #b0502a;
+    --gold: #f6cf4a;
+    --gold-deep: #94700c;
+
+    --ink: #243427;
+    --ink-soft: #44574a;
+    --ink-muted: #6b7d6f;
+    --link: #2f6b3f;
+    --line: rgba(63, 125, 74, 0.18);
+
+    --glass: rgba(255, 254, 247, 0.8);
+    --glass-border: rgba(255, 255, 255, 0.75);
+    --shadow: 0 10px 40px rgba(60, 100, 50, 0.16);
+    --shadow-hover: 0 16px 48px rgba(176, 80, 42, 0.2);
+    --gradient: linear-gradient(120deg, #3f7d4a, #b0502a 60%, #94700c);
+    --petal-gradient: linear-gradient(135deg, #fff3c4, #f6cf4a);
+
+    --bg-base: #cfe8b8;
+    --caption: rgba(36, 52, 39, 0.55);
+    --hover-bg: rgba(246, 207, 74, 0.25);
+    --pulse: rgba(244, 162, 89, 0.5);
+    --bullet-2: linear-gradient(135deg, #e6f4d8, #8cc57a);
+    --bullet-3: linear-gradient(135deg, #ffe3cc, #f4a259);
+    --frame-a: #fff6d6;
+    --frame-b: #eaf5dd;
+    --frame-c: #cfe8b8;
+    --thumb-sakura: linear-gradient(160deg, #6aa85f 0%, #b9b24e 60%, #e98f45 100%);
+    --thumb-slate: linear-gradient(160deg, #6aa85f, #3f7d4a);
+    --thumb-gold: linear-gradient(160deg, #5f9e5a 0%, #a9a13a 60%, #d6a51f 100%);
 }
 
 * { box-sizing: border-box; }
@@ -38,12 +91,87 @@ body {
     line-height: 1.65;
     color: var(--ink);
     -webkit-font-smoothing: antialiased;
+    background: var(--bg-base);
+}
+
+/* ---------- scenes (cross-fade between night and day) ---------- */
+.scene {
+    position: fixed;
+    inset: 0;
+    z-index: 0;
+    pointer-events: none;
+    overflow: hidden;
+    transition: opacity 1.2s ease;
+}
+
+.scene-night {
     background:
         radial-gradient(900px 600px at 85% -10%, rgba(255, 246, 216, 0.28), transparent 60%),
         radial-gradient(700px 700px at 0% 100%, rgba(247, 217, 226, 0.45), transparent 60%),
         linear-gradient(172deg, #6c7c96 0%, #8796ad 30%, #a7b4c6 62%, #c9d1dd 100%);
-    background-color: var(--slate);
-    background-attachment: fixed;
+}
+
+.scene-day {
+    opacity: 0;
+    background:
+        radial-gradient(1000px 700px at 90% -8%, rgba(255, 240, 160, 0.75), transparent 60%),
+        radial-gradient(800px 600px at 0% 30%, rgba(255, 255, 255, 0.45), transparent 60%),
+        linear-gradient(180deg, #bfe6f6 0%, #dff2f0 32%, #e8f4d6 62%, #cfe8b8 100%);
+}
+
+[data-theme="day"] .scene-night { opacity: 0; }
+[data-theme="day"] .scene-day { opacity: 1; }
+
+.sun {
+    position: absolute;
+    top: -10px;
+    right: 4vw;
+    width: 190px;
+    height: 190px;
+    transform: translateY(-40px) scale(0.8);
+    transition: transform 1.4s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+[data-theme="day"] .sun { transform: none; }
+
+.sun-rays {
+    transform-box: fill-box;
+    transform-origin: center;
+    animation: spin 40s linear infinite;
+}
+
+/* soft rays of sunlight fanning out from the sun */
+.sunbeams {
+    position: absolute;
+    inset: 0;
+    background: repeating-conic-gradient(from 190deg at 88% 4%,
+        rgba(255, 248, 205, 0.32) 0deg 4deg,
+        transparent 4deg 13deg);
+    -webkit-mask-image: radial-gradient(circle at 88% 4%, #000 0%, transparent 70%);
+    mask-image: radial-gradient(circle at 88% 4%, #000 0%, transparent 70%);
+    animation: beams 7s ease-in-out infinite;
+}
+
+.garden {
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    width: 100%;
+    height: 24vh;
+    min-height: 130px;
+    max-height: 240px;
+    transform: translateY(30px);
+    transition: transform 1.4s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+[data-theme="day"] .garden { transform: none; }
+
+.garden-flowers,
+.garden-grass {
+    transform-box: fill-box;
+    transform-origin: bottom;
+    animation: sway 5s ease-in-out infinite;
 }
 
 /* ---------- sky layers ---------- */
@@ -59,13 +187,11 @@ body {
 .sky-front { z-index: 20; }
 
 .moon {
-    position: fixed;
+    position: absolute;
     top: 28px;
     right: 6vw;
     width: 110px;
     height: 110px;
-    z-index: 0;
-    pointer-events: none;
     filter: drop-shadow(0 0 18px rgba(255, 240, 200, 0.55));
     animation: moonFloat 9s ease-in-out infinite;
 }
@@ -80,7 +206,7 @@ body {
     font-family: 'Cormorant Garamond', Georgia, serif;
     font-size: 0.95rem;
     letter-spacing: 0.42em;
-    color: rgba(255, 255, 255, 0.72);
+    color: var(--caption);
     z-index: 1;
     pointer-events: none;
     user-select: none;
@@ -196,9 +322,17 @@ a:hover {
     font-family: 'Cormorant Garamond', Georgia, serif;
     font-size: 54px;
     font-weight: 600;
-    fill: #8796ad;
+    fill: var(--slate);
     letter-spacing: 4px;
 }
+
+.side-caption .cap-day { display: none; }
+[data-theme="day"] .side-caption .cap-day { display: inline; }
+[data-theme="day"] .side-caption .cap-night { display: none; }
+
+.frame-stop-a { stop-color: var(--frame-a); }
+.frame-stop-b { stop-color: var(--frame-b); }
+.frame-stop-c { stop-color: var(--frame-c); }
 
 .bio {
     text-align: center;
@@ -278,7 +412,7 @@ a:hover {
 .contact-list li:nth-child(5) a i { color: var(--gold-deep); }
 
 .contact-list a:hover {
-    background: rgba(247, 217, 226, 0.55);
+    background: var(--hover-bg);
     color: var(--sakura-deep);
     transform: translateX(4px);
 }
@@ -376,8 +510,8 @@ a:hover {
     transform: rotate(-20deg);
 }
 
-.latest-news li:nth-child(3n+2)::before { background: linear-gradient(135deg, #e4e9f1, #a7b4c6); }
-.latest-news li:nth-child(3n)::before { background: linear-gradient(135deg, #f6ebc6, #e3cd8c); }
+.latest-news li:nth-child(3n+2)::before { background: var(--bullet-2); }
+.latest-news li:nth-child(3n)::before { background: var(--bullet-3); }
 
 .latest-news li:first-child::before { animation: petalPulse 2.4s ease-in-out infinite; }
 
@@ -558,13 +692,13 @@ a:hover {
     border-radius: 14px;
     overflow: hidden;
     color: #fff;
-    background: linear-gradient(160deg, #8796ad, #6c7c96);
+    background: var(--thumb-slate);
     background-size: auto;
     transition: transform 0.4s ease;
 }
 
-.pub-thumb[data-tone="sakura"] { background: linear-gradient(160deg, #9aa8bd 0%, #c7a5b9 70%, #e8a3b7 100%); }
-.pub-thumb[data-tone="gold"] { background: linear-gradient(160deg, #7a8aa3 0%, #a7a79c 70%, #d7c27f 100%); }
+.pub-thumb[data-tone="sakura"] { background: var(--thumb-sakura); }
+.pub-thumb[data-tone="gold"] { background: var(--thumb-gold); }
 
 .pub-thumb::before {
     content: "✿";
@@ -688,12 +822,76 @@ a:hover {
 
 .site-footer .dot { color: var(--sakura-deep); }
 
-/* ---------- petal toggle ---------- */
-.petal-toggle {
+/* ---------- corner controls ---------- */
+.corner-controls {
     position: fixed;
     right: 18px;
     bottom: calc(18px + env(safe-area-inset-bottom, 0px));
     z-index: 30;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+/* night ⇄ day switch: a pill with a sliding sun/moon knob */
+.theme-toggle {
+    position: relative;
+    width: 76px;
+    height: 36px;
+    padding: 0 10px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-radius: 99px;
+    border: 1px solid var(--glass-border);
+    background: linear-gradient(135deg, #5d6d88, #8796ad);
+    box-shadow: var(--shadow);
+    cursor: pointer;
+    transition: background 0.6s ease, transform 0.25s ease;
+}
+
+.theme-toggle:hover { transform: translateY(-2px); }
+
+[data-theme="day"] .theme-toggle { background: linear-gradient(135deg, #9fd6f0, #ffe27a); }
+
+.tt-icon {
+    position: relative;
+    z-index: 1;
+    font-size: 0.85rem;
+    line-height: 1;
+    transition: color 0.4s ease;
+}
+
+.tt-moon { color: #6c7c96; }
+.tt-sun { color: rgba(255, 255, 255, 0.85); }
+[data-theme="day"] .tt-moon { color: rgba(255, 255, 255, 0.9); }
+[data-theme="day"] .tt-sun { color: #d98b1f; }
+
+.tt-knob {
+    position: absolute;
+    top: 3px;
+    left: 3px;
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    background: #f3e3ae;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2), 0 0 12px rgba(255, 240, 200, 0.7);
+    transition: transform 0.5s cubic-bezier(0.34, 1.56, 0.64, 1), background 0.5s ease;
+}
+
+[data-theme="day"] .tt-knob {
+    transform: translateX(40px);
+    background: #fffbe8;
+}
+
+.theme-toggle:focus-visible,
+.petal-toggle:focus-visible,
+.bib-toggle:focus-visible {
+    outline: 2px solid var(--sakura-deep);
+    outline-offset: 3px;
+}
+
+.petal-toggle {
     display: flex;
     align-items: center;
     gap: 6px;
@@ -730,8 +928,29 @@ a:hover {
 }
 
 @keyframes petalPulse {
-    0%, 100% { box-shadow: 0 0 0 4px rgba(255, 255, 255, 0.9), 0 0 0 4px rgba(232, 163, 183, 0.5); }
-    50% { box-shadow: 0 0 0 4px rgba(255, 255, 255, 0.9), 0 0 0 11px rgba(232, 163, 183, 0); }
+    0%, 100% { box-shadow: 0 0 0 4px rgba(255, 255, 255, 0.9), 0 0 0 4px var(--pulse); }
+    50% { box-shadow: 0 0 0 4px rgba(255, 255, 255, 0.9), 0 0 0 11px transparent; }
+}
+
+@keyframes spin {
+    to { transform: rotate(360deg); }
+}
+
+@keyframes beams {
+    0%, 100% { opacity: 0.65; }
+    50% { opacity: 1; }
+}
+
+@keyframes sway {
+    0%, 100% { transform: skewX(0deg); }
+    50% { transform: skewX(-3deg); }
+}
+
+/* colors ease over during a theme switch (class added briefly by script.js) */
+html.theme-anim .page *,
+html.theme-anim .page *::before,
+html.theme-anim .page *::after {
+    transition: color 0.7s ease, background-color 0.7s ease, border-color 0.7s ease, fill 0.7s ease, stop-color 0.7s ease !important;
 }
 
 @keyframes moonFloat {
@@ -752,6 +971,7 @@ a:hover {
     .bio-text, .timeline-section, .projects-section { padding: 22px 18px; }
     .bio-text { text-align: left; }
     .moon { width: 72px; height: 72px; top: 14px; right: 14px; }
+    .sun { width: 120px; height: 120px; right: 0; }
 
     .timeline::before { left: 11px; }
     .tl-item,

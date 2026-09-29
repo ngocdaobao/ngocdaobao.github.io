@@ -6,6 +6,13 @@
     <title>Bao-Ngoc Dao</title>
     <meta name="description" content="Bao-Ngoc Dao — Computer Science student at HUST and Research Assistant at CAIR, VinUniversity. Continual learning, parameter-efficient fine-tuning, mixture-of-experts, and robot learning.">
     <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E%F0%9F%8C%B8%3C/text%3E%3C/svg%3E">
+    <script>
+        (function () {
+            var t = 'night';
+            try { t = localStorage.getItem('theme') || t; } catch (e) {}
+            document.documentElement.dataset.theme = t === 'day' ? 'day' : 'night';
+        })();
+    </script>
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -13,27 +20,87 @@
     <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,500&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 </head>
 <body>
-    <!-- falling sakura: one layer behind the content, a few larger petals in front -->
+    <!-- night scene: the cherry-blossom card's twilight with a crescent moon -->
+    <div class="scene scene-night" aria-hidden="true">
+        <svg class="moon" viewBox="0 0 100 100">
+            <defs>
+                <radialGradient id="moonGlow" cx="50%" cy="50%" r="50%">
+                    <stop offset="0" stop-color="#fff6d8" stop-opacity=".55"/>
+                    <stop offset="1" stop-color="#fff6d8" stop-opacity="0"/>
+                </radialGradient>
+                <mask id="moonCut">
+                    <rect width="100" height="100" fill="#fff"/>
+                    <circle cx="62" cy="40" r="26" fill="#000"/>
+                </mask>
+            </defs>
+            <circle cx="50" cy="50" r="48" fill="url(#moonGlow)"/>
+            <circle cx="50" cy="50" r="28" fill="#f3e3ae" mask="url(#moonCut)"/>
+        </svg>
+    </div>
+
+    <!-- day scene: summer sunlight over a green garden -->
+    <div class="scene scene-day" aria-hidden="true">
+        <div class="sunbeams"></div>
+        <svg class="sun" viewBox="0 0 200 200">
+            <defs>
+                <radialGradient id="sunGlow" cx="50%" cy="50%" r="50%">
+                    <stop offset="0" stop-color="#fff7c2" stop-opacity=".9"/>
+                    <stop offset=".45" stop-color="#ffe680" stop-opacity=".45"/>
+                    <stop offset="1" stop-color="#ffe680" stop-opacity="0"/>
+                </radialGradient>
+                <radialGradient id="sunCore" cx="45%" cy="40%" r="60%">
+                    <stop offset="0" stop-color="#fffbe0"/>
+                    <stop offset="1" stop-color="#ffd54a"/>
+                </radialGradient>
+            </defs>
+            <circle cx="100" cy="100" r="98" fill="url(#sunGlow)"/>
+            <g class="sun-rays" stroke="#ffe27a" stroke-width="5" stroke-linecap="round" opacity=".85">
+                <line x1="100" y1="22" x2="100" y2="44"/><line x1="100" y1="156" x2="100" y2="178"/>
+                <line x1="22" y1="100" x2="44" y2="100"/><line x1="156" y1="100" x2="178" y2="100"/>
+                <line x1="45" y1="45" x2="60" y2="60"/><line x1="140" y1="140" x2="155" y2="155"/>
+                <line x1="45" y1="155" x2="60" y2="140"/><line x1="140" y1="60" x2="155" y2="45"/>
+            </g>
+            <circle cx="100" cy="100" r="36" fill="url(#sunCore)"/>
+        </svg>
+        <svg class="garden" viewBox="0 0 1440 240" preserveAspectRatio="xMidYMax slice">
+            <defs>
+                <g id="gFlower">
+                    <circle cx="0" cy="-5" r="4.2"/><circle cx="4.8" cy="-1.5" r="4.2"/><circle cx="3" cy="4" r="4.2"/>
+                    <circle cx="-3" cy="4" r="4.2"/><circle cx="-4.8" cy="-1.5" r="4.2"/>
+                </g>
+            </defs>
+            <path fill="#bfe2a3" d="M0 150 C200 90 380 125 560 112 C760 96 900 58 1100 100 C1250 130 1360 88 1440 100 V240 H0Z"/>
+            <path fill="#94c97d" d="M0 188 C120 150 220 172 300 160 C420 140 520 176 640 165 C780 150 880 182 1000 170 C1140 155 1260 186 1440 160 V240 H0Z"/>
+            <g class="garden-flowers">
+                <use href="#gFlower" x="90" y="176" fill="#ffffff"/><circle cx="90" cy="176" r="2.6" fill="#f6cf4a"/>
+                <use href="#gFlower" x="210" y="168" fill="#ffd96b"/><circle cx="210" cy="168" r="2.6" fill="#d98b1f"/>
+                <use href="#gFlower" x="345" y="158" fill="#ffb199"/><circle cx="345" cy="158" r="2.6" fill="#f6cf4a"/>
+                <use href="#gFlower" x="470" y="162" fill="#ffffff"/><circle cx="470" cy="162" r="2.6" fill="#f6cf4a"/>
+                <use href="#gFlower" x="600" y="170" fill="#ffc4d6"/><circle cx="600" cy="170" r="2.6" fill="#f6cf4a"/>
+                <use href="#gFlower" x="735" y="160" fill="#ffd96b"/><circle cx="735" cy="160" r="2.6" fill="#d98b1f"/>
+                <use href="#gFlower" x="860" y="170" fill="#ffffff"/><circle cx="860" cy="170" r="2.6" fill="#f6cf4a"/>
+                <use href="#gFlower" x="990" y="172" fill="#ffb199"/><circle cx="990" cy="172" r="2.6" fill="#f6cf4a"/>
+                <use href="#gFlower" x="1110" y="160" fill="#ffc4d6"/><circle cx="1110" cy="160" r="2.6" fill="#f6cf4a"/>
+                <use href="#gFlower" x="1235" y="170" fill="#ffffff"/><circle cx="1235" cy="170" r="2.6" fill="#f6cf4a"/>
+                <use href="#gFlower" x="1360" y="166" fill="#ffd96b"/><circle cx="1360" cy="166" r="2.6" fill="#d98b1f"/>
+            </g>
+            <path fill="#6aa85f" d="M0 214 C160 194 300 226 480 210 C660 194 820 228 1000 212 C1180 198 1320 226 1440 207 V240 H0Z"/>
+            <g class="garden-grass" stroke="#6aa85f" stroke-width="3" stroke-linecap="round" fill="none">
+                <path d="M40 216 q4 -18 -2 -30"/><path d="M48 216 q2 -14 8 -24"/>
+                <path d="M300 222 q-3 -16 3 -28"/><path d="M308 222 q4 -12 10 -20"/>
+                <path d="M640 212 q4 -18 -2 -30"/><path d="M648 212 q2 -14 8 -24"/>
+                <path d="M930 216 q-3 -16 3 -28"/><path d="M938 216 q4 -12 10 -20"/>
+                <path d="M1270 214 q4 -18 -2 -30"/><path d="M1278 214 q2 -14 8 -24"/>
+            </g>
+        </svg>
+    </div>
+
+    <!-- falling sakura (night) or leaves and summer flowers (day):
+         one layer behind the content, a few larger ones in front -->
     <canvas id="sky-back" class="sky" aria-hidden="true"></canvas>
     <canvas id="sky-front" class="sky sky-front" aria-hidden="true"></canvas>
 
-    <!-- crescent moon, like the one on the cherry-blossom card -->
-    <svg class="moon" viewBox="0 0 100 100" aria-hidden="true">
-        <defs>
-            <radialGradient id="moonGlow" cx="50%" cy="50%" r="50%">
-                <stop offset="0" stop-color="#fff6d8" stop-opacity=".55"/>
-                <stop offset="1" stop-color="#fff6d8" stop-opacity="0"/>
-            </radialGradient>
-            <mask id="moonCut">
-                <rect width="100" height="100" fill="#fff"/>
-                <circle cx="62" cy="40" r="26" fill="#000"/>
-            </mask>
-        </defs>
-        <circle cx="50" cy="50" r="48" fill="url(#moonGlow)"/>
-        <circle cx="50" cy="50" r="28" fill="#f3e3ae" mask="url(#moonCut)"/>
-    </svg>
-
-    <div class="side-caption" aria-hidden="true">Bao-Ngoc Dao &nbsp;·&nbsp; Cherry Blossom</div>
+    <div class="side-caption" aria-hidden="true">Bao-Ngoc Dao &nbsp;·&nbsp; <span class="cap-night">Cherry Blossom</span><span class="cap-day">Summer Garden</span></div>
 
     <main class="page">
         <header class="profile-header">
@@ -43,15 +110,15 @@
                         <path id="sakuraShape" d="M66.9 54.5 C43.9 33.1 57.4 8.6 84.8 4.2 L100.0 15.6 L115.2 4.2 C142.6 8.6 156.1 33.1 133.1 54.5 C146.3 26.0 173.8 31.2 186.4 56.0 L180.3 73.9 L195.8 84.8 C200.1 112.3 180.9 132.7 153.5 117.4 C184.7 121.1 188.2 148.9 168.6 168.6 L149.6 168.3 L144.0 186.4 C119.2 199.0 93.9 187.1 100.0 156.3 C106.1 187.1 80.8 199.0 56.0 186.4 L50.4 168.3 L31.4 168.6 C11.8 148.9 15.3 121.1 46.5 117.4 C19.1 132.7 -0.1 112.3 4.2 84.8 L19.7 73.9 L13.6 56.0 C26.2 31.2 53.7 26.0 66.9 54.5 Z"/>
                         <clipPath id="sakuraClip"><use href="#sakuraShape"/></clipPath>
                         <linearGradient id="frameFill" x1="0" y1="0" x2="0.4" y2="1">
-                            <stop offset="0" stop-color="#e3e8f0"/>
-                            <stop offset="0.55" stop-color="#dfe3ee"/>
-                            <stop offset="1" stop-color="#f6d3de"/>
+                            <stop offset="0" class="frame-stop-a"/>
+                            <stop offset="0.55" class="frame-stop-b"/>
+                            <stop offset="1" class="frame-stop-c"/>
                         </linearGradient>
                     </defs>
                     <use href="#sakuraShape" fill="url(#frameFill)"/>
-                    <!-- shown only if images/profile.jpg is missing -->
+                    <!-- shown only if images/profile.png is missing -->
                     <text x="100" y="116" text-anchor="middle" class="frame-initials">BN</text>
-                    <image href="images/profile.jpg" onerror="this.remove()" x="0" y="0" width="200" height="200" preserveAspectRatio="xMidYMid slice" clip-path="url(#sakuraClip)"/>
+                    <image href="images/profile.png" onerror="this.remove()" x="0" y="0" width="200" height="200" preserveAspectRatio="xMidYMid slice" clip-path="url(#sakuraClip)"/>
                     <use href="#sakuraShape" fill="none" stroke="#ffffff" stroke-opacity=".9" stroke-width="3"/>
                 </svg>
 
@@ -257,10 +324,17 @@
         </footer>
     </main>
 
-    <button type="button" class="petal-toggle" aria-pressed="true" title="Pause falling petals">
-        <span class="petal-toggle-icon" aria-hidden="true">🌸</span>
-        <span class="petal-toggle-label">Petals on</span>
-    </button>
+    <div class="corner-controls">
+        <button type="button" class="theme-toggle" role="switch" aria-checked="false" aria-label="Daylight theme" title="Switch to summer daylight">
+            <span class="tt-icon tt-moon" aria-hidden="true"><i class="fas fa-moon"></i></span>
+            <span class="tt-icon tt-sun" aria-hidden="true"><i class="fas fa-sun"></i></span>
+            <span class="tt-knob" aria-hidden="true"></span>
+        </button>
+        <button type="button" class="petal-toggle" aria-pressed="true" title="Pause falling petals">
+            <span class="petal-toggle-icon" aria-hidden="true">🌸</span>
+            <span class="petal-toggle-label">Petals on</span>
+        </button>
+    </div>
 
     <script src="script.js"></script>
 </body>

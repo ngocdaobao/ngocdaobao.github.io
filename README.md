@@ -3,7 +3,7 @@
 Personal academic homepage: a cherry-blossom night theme with falling sakura petals.
 
 ## Before publishing
-- `images/profile.jpg`: add a square photo. It is clipped to the blossom frame, and until it exists the frame shows "BN".
+- `images/profile.png`: your photo (square works best). It is clipped to the blossom frame, and until it exists the frame shows "BN".
 - `cv.pdf`: add your CV to the repo root.
 - `index.html`: replace the LinkedIn placeholder URL (search for `TODO`).
 - Latest News: check the WAVE++ entry date.
