@@ -39,7 +39,7 @@
     --thumb-gold: linear-gradient(160deg, #7a8aa3 0%, #a7a79c 70%, #d7c27f 100%);
 }
 
-/* Summer daylight: sunlight through a green canopy, fresh leaf and lime accents */
+/* Summer daylight: sunny greens with fresh leaf and lime accents */
 :root[data-theme="day"] {
     --night: #2f6f34;
     --slate: #5aa845;
@@ -133,7 +133,7 @@ body {
         radial-gradient(300px 200px at 8% 60%, rgba(200, 230, 240, 0.4), transparent 70%);
 }
 
-/* the diagonal shaft of sunlight running under the canopy */
+/* a diagonal shaft of sunlight across the page */
 .sunbeam {
     position: absolute;
     left: 50%;
@@ -158,23 +158,21 @@ body {
     animation-delay: -3s;
 }
 
-.leaf-canopy {
+/* sun: same place and size as the night moon */
+.sun {
     position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 72vh;
-    min-height: 360px;
-    overflow: visible;
-    transform: translate(-30px, -30px);
-    transition: transform 1.6s cubic-bezier(0.22, 1, 0.36, 1);
+    top: 28px;
+    right: 6vw;
+    width: 110px;
+    height: 110px;
+    filter: drop-shadow(0 0 22px rgba(255, 250, 200, 0.8));
+    animation: moonFloat 9s ease-in-out infinite;
 }
 
-[data-theme="day"] .leaf-canopy { transform: none; }
-
-.canopy-sway {
-    transform-origin: 0 0;
-    animation: canopy 8s ease-in-out infinite;
+.sun-rays {
+    transform-box: fill-box;
+    transform-origin: center;
+    animation: spin 30s linear infinite;
 }
 
 /* ---------- sky layers ---------- */
@@ -940,9 +938,8 @@ a:hover {
     50% { opacity: 1; }
 }
 
-@keyframes canopy {
-    0%, 100% { transform: rotate(0deg); }
-    50% { transform: rotate(0.6deg) translateY(3px); }
+@keyframes spin {
+    to { transform: rotate(360deg); }
 }
 
 /* colors ease over during a theme switch (class added briefly by script.js) */
@@ -969,7 +966,8 @@ html.theme-anim .page *::after {
     .page { padding: 28px 16px 60px; }
     .bio-text, .timeline-section, .projects-section { padding: 22px 18px; }
     .bio-text { text-align: left; }
-    .moon { width: 72px; height: 72px; top: 14px; right: 14px; }
+    .moon,
+    .sun { width: 72px; height: 72px; top: 14px; right: 14px; }
 
     .timeline::before { left: 11px; }
     .tl-item,

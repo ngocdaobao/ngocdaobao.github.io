@@ -23,4 +23,4 @@ Personal academic homepage: a cherry-blossom night theme with falling sakura pet
 - Add a publication by copying an `<article class="publication">` block. The venue tile tone is `data-tone="sakura|slate|gold"`, or put an `<img>` inside `.pub-thumb` to show a figure instead.
 - Colors are CSS variables at the top of `style.css`.
 - Petal density and speed are set in `populate()` and `makePetal()` in `script.js`.
-- The moon/sun switch toggles between the cherry-blossom night and a green summer day (`data-theme="night|day"` on `<html>`). Day colors are in the `:root[data-theme="day"]` block of `style.css`; its scene (leaf canopy, sunbeam) is the `.scene-day` block in `index.html`, and the bubbles live in `script.js`.
+- The moon/sun switch toggles between the cherry-blossom night and a green summer day (`data-theme="night|day"` on `<html>`). Day colors are in the `:root[data-theme="day"]` block of `style.css`; its scene (sun, sunbeam) is the `.scene-day` block in `index.html`, and the bubbles live in `script.js`.
