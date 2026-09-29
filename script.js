@@ -23,7 +23,7 @@ document.querySelectorAll('.bib-toggle').forEach((btn) => {
 });
 
 
-// ---------- sky: sakura at night, leaves and summer flowers by day ----------
+// ---------- sky: sakura at night; sakura and green leaves in the blossom pavilion ----------
 (function sky() {
     const root = document.documentElement;
     const back = document.getElementById('sky-back');
@@ -48,17 +48,16 @@ document.querySelectorAll('.bib-toggle').forEach((btn) => {
         ['#a8d88e', '#3f7d4a'],
         ['#e9f2a6', '#a9c95a'],
     ];
-    // [petal, center]: daisy, sunflower yellow, coral, cosmos pink
-    const FLOWERS = [
-        ['#ffffff', '#f6cf4a'],
-        ['#ffe27a', '#d98b1f'],
-        ['#ffb199', '#f6cf4a'],
-        ['#ffc4d6', '#f6cf4a'],
+    // brighter, coral-pink blossoms of the sunlit pavilion
+    const DAY_SAKURA = [
+        ['#ffe6e9', '#f59aa8'],
+        ['#ffd9de', '#f28b9b'],
+        ['#fff2f4', '#f7b5bf'],
+        ['#ffffff', '#fbd3d9'],
     ];
-    const BUTTERFLY_COLORS = ['#f6cf4a', '#ffffff', '#f4a259', '#a8d8f5'];
 
     let W = 0, H = 0, DPR = 1;
-    let petalsBack = [], petalsFront = [], stars = [], motes = [], streaks = [], butterflies = [];
+    let petalsBack = [], petalsFront = [], stars = [], motes = [], streaks = [];
     let wind = 0, windTarget = 0, t = 0;
     let theme = root.dataset.theme === 'day' ? 'day' : 'night';
     let dayMix = theme === 'day' ? 1 : 0; // eases 0 (night) → 1 (day) for the sky details
@@ -87,14 +86,12 @@ document.querySelectorAll('.bib-toggle').forEach((btn) => {
     function makePetal(isFront, x, y) {
         let kind = 'sakura', tint = pick(SAKURA), size = isFront ? rand(14, 22) : rand(7, 14);
         if (theme === 'day') {
-            if (Math.random() < 0.55) {
+            if (Math.random() < 0.4) {
                 kind = 'leaf';
                 tint = pick(LEAVES);
                 size = isFront ? rand(18, 26) : rand(10, 17);
             } else {
-                kind = 'flower';
-                tint = pick(FLOWERS);
-                size = isFront ? rand(16, 22) : rand(9, 15);
+                tint = pick(DAY_SAKURA);
             }
         }
         return {
@@ -142,19 +139,6 @@ document.querySelectorAll('.bib-toggle').forEach((btn) => {
         }));
     }
 
-    function makeButterfly() {
-        return {
-            x: rand(0, W),
-            y: rand(H * 0.25, H * 0.8),
-            angle: rand(0, Math.PI * 2),
-            turn: 0,
-            speed: rand(0.6, 1.1),
-            flap: rand(0, Math.PI * 2),
-            size: rand(0.9, 1.3),
-            color: pick(BUTTERFLY_COLORS),
-        };
-    }
-
     // a sakura petal: rounded teardrop with the signature notch at the tip
     function sakuraPath(ctx, s) {
         const w = s * 0.62, h = s;
@@ -184,22 +168,6 @@ document.querySelectorAll('.bib-toggle').forEach((btn) => {
         ctx.scale(1, 0.35 + 0.65 * Math.abs(Math.cos(p.flip)));
         ctx.globalAlpha = p.alpha;
         const s = p.size;
-
-        if (p.kind === 'flower') {
-            ctx.fillStyle = p.tint[0];
-            for (let k = 0; k < 5; k++) {
-                ctx.rotate((Math.PI * 2) / 5);
-                ctx.beginPath();
-                ctx.ellipse(0, -s * 0.28, s * 0.17, s * 0.27, 0, 0, Math.PI * 2);
-                ctx.fill();
-            }
-            ctx.fillStyle = p.tint[1];
-            ctx.beginPath();
-            ctx.arc(0, 0, s * 0.13, 0, Math.PI * 2);
-            ctx.fill();
-            ctx.restore();
-            return;
-        }
 
         const g = ctx.createLinearGradient(0, -s / 2, 0, s / 2);
         g.addColorStop(0, p.tint[0]);
@@ -287,48 +255,6 @@ document.querySelectorAll('.bib-toggle').forEach((btn) => {
         ctx.stroke();
     }
 
-    function stepButterfly(b) {
-        b.turn = (b.turn + rand(-0.06, 0.06)) * 0.94;
-        b.angle += b.turn;
-        // flutter away from the cursor
-        const dx = b.x - mouse.x, dy = b.y - mouse.y;
-        if (dx * dx + dy * dy < 130 * 130) b.angle += (Math.atan2(dy, dx) - b.angle) * 0.15;
-        b.x += Math.cos(b.angle) * b.speed;
-        b.y += Math.sin(b.angle) * b.speed * 0.6 + Math.sin(t * 0.08 + b.flap) * 0.4;
-        b.flap += 0.35;
-        if (b.x < -30) b.x = W + 30;
-        if (b.x > W + 30) b.x = -30;
-        if (b.y < 20) b.angle = Math.abs(b.angle) % Math.PI;          // head back down
-        if (b.y > H - 20) b.angle = -(Math.abs(b.angle) % Math.PI);   // head back up
-    }
-
-    function drawButterfly(ctx, b, fade) {
-        const open = 0.2 + 0.8 * Math.abs(Math.sin(b.flap));
-        ctx.save();
-        ctx.translate(b.x, b.y);
-        ctx.rotate(b.angle + Math.PI / 2);
-        ctx.scale(b.size, b.size);
-        ctx.globalAlpha = 0.92 * fade;
-        ctx.fillStyle = b.color;
-        ctx.strokeStyle = 'rgba(90, 70, 30, 0.45)';
-        ctx.lineWidth = 0.7;
-        [-1, 1].forEach((side) => {
-            ctx.beginPath();
-            ctx.ellipse(side * 5.5 * open, -2.5, 5.5 * open, 5, side * 0.5, 0, Math.PI * 2);
-            ctx.fill();
-            ctx.stroke();
-            ctx.beginPath();
-            ctx.ellipse(side * 4 * open, 4, 3.8 * open, 3.6, -side * 0.4, 0, Math.PI * 2);
-            ctx.fill();
-            ctx.stroke();
-        });
-        ctx.fillStyle = '#4a3b22';
-        ctx.beginPath();
-        ctx.ellipse(0, 0, 1.1, 6, 0, 0, Math.PI * 2);
-        ctx.fill();
-        ctx.restore();
-    }
-
     function step(p) {
         p.x += p.vx + wind + Math.sin(t * p.swayFreq + p.phase) * p.sway * 0.6 + p.kick;
         p.y += p.vy;
@@ -373,7 +299,6 @@ document.querySelectorAll('.bib-toggle').forEach((btn) => {
         const y = () => (fromTop ? rand(-H * 0.9, -10) : rand(-H, H));
         petalsBack = Array.from({ length: n.back }, () => makePetal(false, undefined, y()));
         petalsFront = Array.from({ length: n.front }, () => makePetal(true, undefined, y()));
-        butterflies = Array.from({ length: W < 600 ? 1 : 2 }, makeButterfly);
     }
 
     function drawSkyDetails(ctx) {
@@ -403,23 +328,19 @@ document.querySelectorAll('.bib-toggle').forEach((btn) => {
         recycle(petalsBack, false);
         recycle(petalsFront, true);
 
-        if (dayMix > 0.01) {
-            butterflies.forEach((b) => { stepButterfly(b); drawButterfly(ctxF, b, dayMix); });
-        }
         ctxB.globalAlpha = 1;
         ctxF.globalAlpha = 1;
 
         rafId = requestAnimationFrame(frame);
     }
 
-    // a still scene: stars or sun motes, a few resting petals, and the butterflies
+    // a still scene: stars or sun motes and a few resting petals
     function drawStill() {
         dayMix = theme === 'day' ? 1 : 0;
         ctxB.clearRect(0, 0, W, H);
         ctxF.clearRect(0, 0, W, H);
         drawSkyDetails(ctxB);
         petalsBack.filter((p) => p.y > 0 && p.y < H).slice(0, 14).forEach((p) => drawPetal(ctxB, p));
-        if (theme === 'day') butterflies.forEach((b) => drawButterfly(ctxF, b, 1));
         ctxB.globalAlpha = 1;
         ctxF.globalAlpha = 1;
     }
@@ -437,7 +358,7 @@ document.querySelectorAll('.bib-toggle').forEach((btn) => {
 
     function updatePetalLabel() {
         toggle.setAttribute('aria-pressed', String(running));
-        toggle.querySelector('.petal-toggle-icon').textContent = theme === 'day' ? '🌼' : '🌸';
+        toggle.querySelector('.petal-toggle-icon').textContent = theme === 'day' ? '🍃' : '🌸';
         toggle.querySelector('.petal-toggle-label').textContent = running ? 'Petals on' : 'Petals off';
         toggle.title = running ? 'Pause falling petals' : 'Let the petals fall';
     }
@@ -455,7 +376,7 @@ document.querySelectorAll('.bib-toggle').forEach((btn) => {
         root.dataset.theme = next;
         const day = next === 'day';
         themeToggle.setAttribute('aria-checked', String(day));
-        themeToggle.title = day ? 'Switch to cherry-blossom night' : 'Switch to summer daylight';
+        themeToggle.title = day ? 'Switch to cherry-blossom night' : 'Switch to the sunlit blossom pavilion';
         updatePetalLabel();
         if (!animate) return;
 

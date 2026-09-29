@@ -38,61 +38,312 @@
         </svg>
     </div>
 
-    <!-- day scene: summer sunlight over a green garden -->
+    <!-- day scene: a sunlit blossom pavilion over a lotus pond -->
     <div class="scene scene-day" aria-hidden="true">
-        <div class="sunbeams"></div>
-        <svg class="sun" viewBox="0 0 200 200">
+        <div class="foliage"></div>
+        <svg class="pond" viewBox="0 0 1440 260" preserveAspectRatio="xMidYMax slice">
             <defs>
-                <radialGradient id="sunGlow" cx="50%" cy="50%" r="50%">
-                    <stop offset="0" stop-color="#fff7c2" stop-opacity=".9"/>
-                    <stop offset=".45" stop-color="#ffe680" stop-opacity=".45"/>
-                    <stop offset="1" stop-color="#ffe680" stop-opacity="0"/>
-                </radialGradient>
-                <radialGradient id="sunCore" cx="45%" cy="40%" r="60%">
-                    <stop offset="0" stop-color="#fffbe0"/>
-                    <stop offset="1" stop-color="#ffd54a"/>
-                </radialGradient>
-            </defs>
-            <circle cx="100" cy="100" r="98" fill="url(#sunGlow)"/>
-            <g class="sun-rays" stroke="#ffe27a" stroke-width="5" stroke-linecap="round" opacity=".85">
-                <line x1="100" y1="22" x2="100" y2="44"/><line x1="100" y1="156" x2="100" y2="178"/>
-                <line x1="22" y1="100" x2="44" y2="100"/><line x1="156" y1="100" x2="178" y2="100"/>
-                <line x1="45" y1="45" x2="60" y2="60"/><line x1="140" y1="140" x2="155" y2="155"/>
-                <line x1="45" y1="155" x2="60" y2="140"/><line x1="140" y1="60" x2="155" y2="45"/>
-            </g>
-            <circle cx="100" cy="100" r="36" fill="url(#sunCore)"/>
-        </svg>
-        <svg class="garden" viewBox="0 0 1440 240" preserveAspectRatio="xMidYMax slice">
-            <defs>
-                <g id="gFlower">
-                    <circle cx="0" cy="-5" r="4.2"/><circle cx="4.8" cy="-1.5" r="4.2"/><circle cx="3" cy="4" r="4.2"/>
-                    <circle cx="-3" cy="4" r="4.2"/><circle cx="-4.8" cy="-1.5" r="4.2"/>
+                <linearGradient id="water" x1="0" y1="0" x2="0" y2="1">
+                    <stop offset="0" stop-color="#8fe0cf"/>
+                    <stop offset=".5" stop-color="#5cc6b4"/>
+                    <stop offset="1" stop-color="#46b1a2"/>
+                </linearGradient>
+                <path id="pad" d="M0 0 L26 -3 A26 9 0 1 0 25 4 Z" fill="#a3d67f" stroke="#7fbf64" stroke-width="1.5"/>
+                <g id="lotus">
+                    <path d="M0 0 C-5 -4 -4 -12 0 -15 C4 -12 5 -4 0 0Z" fill="#f7b8c4" transform="rotate(-50)"/>
+                    <path d="M0 0 C-5 -4 -4 -12 0 -15 C4 -12 5 -4 0 0Z" fill="#f7b8c4" transform="rotate(50)"/>
+                    <path d="M0 0 C-5 -4 -4 -12 0 -15 C4 -12 5 -4 0 0Z" fill="#fbd0d8" transform="rotate(-22)"/>
+                    <path d="M0 0 C-5 -4 -4 -12 0 -15 C4 -12 5 -4 0 0Z" fill="#fbd0d8" transform="rotate(22)"/>
+                    <path d="M0 0 C-5 -4 -4 -13 0 -17 C4 -13 5 -4 0 0Z" fill="#fff0f3"/>
                 </g>
             </defs>
-            <path fill="#bfe2a3" d="M0 150 C200 90 380 125 560 112 C760 96 900 58 1100 100 C1250 130 1360 88 1440 100 V240 H0Z"/>
-            <path fill="#94c97d" d="M0 188 C120 150 220 172 300 160 C420 140 520 176 640 165 C780 150 880 182 1000 170 C1140 155 1260 186 1440 160 V240 H0Z"/>
-            <g class="garden-flowers">
-                <use href="#gFlower" x="90" y="176" fill="#ffffff"/><circle cx="90" cy="176" r="2.6" fill="#f6cf4a"/>
-                <use href="#gFlower" x="210" y="168" fill="#ffd96b"/><circle cx="210" cy="168" r="2.6" fill="#d98b1f"/>
-                <use href="#gFlower" x="345" y="158" fill="#ffb199"/><circle cx="345" cy="158" r="2.6" fill="#f6cf4a"/>
-                <use href="#gFlower" x="470" y="162" fill="#ffffff"/><circle cx="470" cy="162" r="2.6" fill="#f6cf4a"/>
-                <use href="#gFlower" x="600" y="170" fill="#ffc4d6"/><circle cx="600" cy="170" r="2.6" fill="#f6cf4a"/>
-                <use href="#gFlower" x="735" y="160" fill="#ffd96b"/><circle cx="735" cy="160" r="2.6" fill="#d98b1f"/>
-                <use href="#gFlower" x="860" y="170" fill="#ffffff"/><circle cx="860" cy="170" r="2.6" fill="#f6cf4a"/>
-                <use href="#gFlower" x="990" y="172" fill="#ffb199"/><circle cx="990" cy="172" r="2.6" fill="#f6cf4a"/>
-                <use href="#gFlower" x="1110" y="160" fill="#ffc4d6"/><circle cx="1110" cy="160" r="2.6" fill="#f6cf4a"/>
-                <use href="#gFlower" x="1235" y="170" fill="#ffffff"/><circle cx="1235" cy="170" r="2.6" fill="#f6cf4a"/>
-                <use href="#gFlower" x="1360" y="166" fill="#ffd96b"/><circle cx="1360" cy="166" r="2.6" fill="#d98b1f"/>
+            <!-- far shore greenery -->
+            <path fill="#7cc38c" d="M0 70 C60 30 120 50 170 40 C240 20 300 55 360 45 C430 30 480 60 560 50 C640 38 700 62 780 48 C860 34 930 58 1000 46 C1080 30 1150 60 1230 44 C1300 32 1380 52 1440 40 V90 H0Z"/>
+            <path fill="#5fae78" d="M0 82 C80 66 160 80 260 72 C380 62 480 84 620 76 C760 68 880 86 1020 76 C1160 66 1300 84 1440 74 V96 H0Z"/>
+            <rect y="84" width="1440" height="176" fill="url(#water)"/>
+            <g class="ripples" stroke="#ffffff" stroke-linecap="round" fill="none" opacity=".55">
+                <path d="M60 110 q30 -5 60 0"/><path d="M300 150 q40 -6 80 0"/><path d="M520 118 q25 -4 50 0"/>
+                <path d="M700 250 q40 -6 80 0"/><path d="M880 125 q35 -5 70 0"/><path d="M1060 225 q40 -6 80 0"/>
+                <path d="M1200 110 q30 -5 60 0"/><path d="M180 245 q30 -5 60 0"/><path d="M1380 140 q25 -4 50 0"/>
             </g>
-            <path fill="#6aa85f" d="M0 214 C160 194 300 226 480 210 C660 194 820 228 1000 212 C1180 198 1320 226 1440 207 V240 H0Z"/>
-            <g class="garden-grass" stroke="#6aa85f" stroke-width="3" stroke-linecap="round" fill="none">
-                <path d="M40 216 q4 -18 -2 -30"/><path d="M48 216 q2 -14 8 -24"/>
-                <path d="M300 222 q-3 -16 3 -28"/><path d="M308 222 q4 -12 10 -20"/>
-                <path d="M640 212 q4 -18 -2 -30"/><path d="M648 212 q2 -14 8 -24"/>
-                <path d="M930 216 q-3 -16 3 -28"/><path d="M938 216 q4 -12 10 -20"/>
-                <path d="M1270 214 q4 -18 -2 -30"/><path d="M1278 214 q2 -14 8 -24"/>
+                <use href="#pad" transform="translate(120 150) rotate(-15) scale(1.15)"/>
+                <use href="#pad" transform="translate(230 185) rotate(15) scale(0.92)"/>
+                <use href="#pad" transform="translate(420 130) rotate(-21) scale(0.77)"/>
+                <use href="#pad" transform="translate(640 200) rotate(-2) scale(1.31)"/>
+                <use href="#pad" transform="translate(760 150) rotate(-24) scale(0.85)"/>
+                <use href="#pad" transform="translate(980 190) rotate(-26) scale(1.08)"/>
+                <use href="#pad" transform="translate(1120 140) rotate(10) scale(0.77)"/>
+                <use href="#pad" transform="translate(1300 175) rotate(-21) scale(1.23)"/>
+                <use href="#pad" transform="translate(1380 220) rotate(25) scale(0.85)"/>
+                <use href="#pad" transform="translate(360 225) rotate(12) scale(1.00)"/>
+                <use href="#pad" transform="translate(860 235) rotate(20) scale(0.92)"/>
+                <use href="#pad" transform="translate(80 235) rotate(-13) scale(0.77)"/>
+                <use href="#lotus" transform="translate(130 140) scale(1.0)"/>
+                <use href="#lotus" transform="translate(645 188) scale(1.2)"/>
+                <use href="#lotus" transform="translate(1305 164) scale(1.1)"/>
+                <use href="#lotus" transform="translate(420 122) scale(0.8)"/>
+                <use href="#lotus" transform="translate(990 180) scale(0.9)"/>
+        </svg>
+        <div class="dapple"></div>
+        <svg class="blossom-canopy" viewBox="0 0 1440 320" preserveAspectRatio="xMidYMin slice">
+            <defs>
+                <g id="blossom">
+                    <g fill="currentColor">
+                        <ellipse cx="0" cy="-5.5" rx="4" ry="5.2"/>
+                        <ellipse cx="0" cy="-5.5" rx="4" ry="5.2" transform="rotate(72)"/>
+                        <ellipse cx="0" cy="-5.5" rx="4" ry="5.2" transform="rotate(144)"/>
+                        <ellipse cx="0" cy="-5.5" rx="4" ry="5.2" transform="rotate(216)"/>
+                        <ellipse cx="0" cy="-5.5" rx="4" ry="5.2" transform="rotate(288)"/>
+                    </g>
+                    <circle r="2" fill="#fff4d6"/>
+                    <circle r="1" fill="#e0607a"/>
+                </g>
+            </defs>
+            <!-- pavilion beams -->
+            <rect x="0" y="0" width="1440" height="12" fill="#8e9a88" opacity=".85"/>
+            <rect x="0" y="22" width="1440" height="5" fill="#8e9a88" opacity=".55"/>
+            <g class="canopy-sway">
+                <defs><filter id="softBloom" x="-20%" y="-50%" width="140%" height="200%"><feGaussianBlur stdDeviation="14"/></filter></defs>
+                <g fill="#f7b2bb" opacity=".55" filter="url(#softBloom)">
+                    <ellipse cx="60" cy="30" rx="130" ry="40"/>
+                    <ellipse cx="250" cy="45" rx="150" ry="42"/>
+                    <ellipse cx="470" cy="50" rx="140" ry="40"/>
+                    <ellipse cx="640" cy="55" rx="110" ry="34"/>
+                    <ellipse cx="900" cy="60" rx="120" ry="36"/>
+                    <ellipse cx="1080" cy="50" rx="150" ry="42"/>
+                    <ellipse cx="1270" cy="34" rx="150" ry="40"/>
+                    <ellipse cx="1420" cy="24" rx="90" ry="34"/>
+                    <ellipse cx="548" cy="150" rx="34" ry="60"/>
+                    <ellipse cx="318" cy="120" rx="26" ry="45"/>
+                    <ellipse cx="790" cy="190" rx="34" ry="80"/>
+                    <ellipse cx="1130" cy="150" rx="28" ry="55"/>
+                </g>
+                <path d="M-20 26 C200 10 420 70 700 52" stroke="#8a5a4a" stroke-width="7" fill="none" stroke-linecap="round"/>
+                <path d="M1460 18 C1260 8 1080 76 860 64" stroke="#8a5a4a" stroke-width="7" fill="none" stroke-linecap="round"/>
+                <path d="M520 48 C510 110 560 190 548 270" stroke="#8a5a4a" stroke-width="3" fill="none" stroke-linecap="round"/>
+                <path d="M300 40 C290 90 330 140 318 190" stroke="#8a5a4a" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+                <path d="M780 58 C800 130 770 220 790 300" stroke="#8a5a4a" stroke-width="3" fill="none" stroke-linecap="round"/>
+                <path d="M1120 50 C1110 110 1150 170 1130 225" stroke="#8a5a4a" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+                <path d="M160 20 C150 60 175 100 165 130" stroke="#8a5a4a" stroke-width="2" fill="none" stroke-linecap="round"/>
+                <path d="M1330 14 C1345 60 1320 100 1335 150" stroke="#8a5a4a" stroke-width="2" fill="none" stroke-linecap="round"/>
+                <use href="#blossom" transform="translate(1396 -21) rotate(46) scale(1.25)" color="#f5a3ad"/>
+                <use href="#blossom" transform="translate(13 -6) rotate(45) scale(1.11)" color="#f7b2bb"/>
+                <use href="#blossom" transform="translate(245 -6) rotate(62) scale(1.23)" color="#ffe3e6"/>
+                <use href="#blossom" transform="translate(817 -4) rotate(66) scale(1.01)" color="#f28b9b"/>
+                <use href="#blossom" transform="translate(791 -3) rotate(12) scale(1.46)" color="#fbd3d8"/>
+                <use href="#blossom" transform="translate(346 -3) rotate(4) scale(1.24)" color="#f7b2bb"/>
+                <use href="#blossom" transform="translate(259 -3) rotate(32) scale(1.59)" color="#f7b2bb"/>
+                <use href="#blossom" transform="translate(1357 -3) rotate(44) scale(1.33)" color="#f28b9b"/>
+                <use href="#blossom" transform="translate(234 -3) rotate(49) scale(1.24)" color="#ef7f91"/>
+                <use href="#blossom" transform="translate(1138 -3) rotate(25) scale(1.17)" color="#f5a3ad"/>
+                <use href="#blossom" transform="translate(922 -2) rotate(40) scale(1.44)" color="#f7b2bb"/>
+                <use href="#blossom" transform="translate(680 -1) rotate(16) scale(1.15)" color="#f28b9b"/>
+                <use href="#blossom" transform="translate(1305 -0) rotate(29) scale(1.33)" color="#f9c5cc"/>
+                <use href="#blossom" transform="translate(30 1) rotate(55) scale(1.19)" color="#f28b9b"/>
+                <use href="#blossom" transform="translate(662 1) rotate(1) scale(0.94)" color="#f5a3ad"/>
+                <use href="#blossom" transform="translate(1071 2) rotate(44) scale(1.10)" color="#f7b2bb"/>
+                <use href="#blossom" transform="translate(1419 2) rotate(17) scale(1.19)" color="#f7b2bb"/>
+                <use href="#blossom" transform="translate(1412 2) rotate(13) scale(1.14)" color="#f7b2bb"/>
+                <use href="#blossom" transform="translate(1057 3) rotate(0) scale(1.20)" color="#f5a3ad"/>
+                <use href="#blossom" transform="translate(904 3) rotate(53) scale(1.25)" color="#fbd3d8"/>
+                <use href="#blossom" transform="translate(509 4) rotate(38) scale(1.31)" color="#f5a3ad"/>
+                <use href="#blossom" transform="translate(1299 4) rotate(68) scale(1.49)" color="#fbd3d8"/>
+                <use href="#blossom" transform="translate(255 4) rotate(36) scale(1.52)" color="#f7b2bb"/>
+                <use href="#blossom" transform="translate(204 4) rotate(40) scale(1.22)" color="#ef7f91"/>
+                <use href="#blossom" transform="translate(891 4) rotate(47) scale(0.93)" color="#f5a3ad"/>
+                <use href="#blossom" transform="translate(162 5) rotate(24) scale(0.93)" color="#f7b2bb"/>
+                <use href="#blossom" transform="translate(1405 5) rotate(60) scale(0.90)" color="#fbd3d8"/>
+                <use href="#blossom" transform="translate(376 5) rotate(33) scale(1.04)" color="#f5a3ad"/>
+                <use href="#blossom" transform="translate(37 6) rotate(63) scale(1.23)" color="#fbd3d8"/>
+                <use href="#blossom" transform="translate(40 7) rotate(15) scale(0.94)" color="#f7b2bb"/>
+                <use href="#blossom" transform="translate(254 8) rotate(26) scale(0.92)" color="#ffe3e6"/>
+                <use href="#blossom" transform="translate(1391 8) rotate(72) scale(1.52)" color="#ffe3e6"/>
+                <use href="#blossom" transform="translate(1030 9) rotate(4) scale(1.16)" color="#f5a3ad"/>
+                <use href="#blossom" transform="translate(922 10) rotate(57) scale(1.29)" color="#f7b2bb"/>
+                <use href="#blossom" transform="translate(834 10) rotate(10) scale(1.21)" color="#f5a3ad"/>
+                <use href="#blossom" transform="translate(309 12) rotate(25) scale(1.48)" color="#f5a3ad"/>
+                <use href="#blossom" transform="translate(1009 12) rotate(36) scale(1.37)" color="#ffe3e6"/>
+                <use href="#blossom" transform="translate(842 13) rotate(47) scale(1.21)" color="#ffe3e6"/>
+                <use href="#blossom" transform="translate(1462 13) rotate(15) scale(1.13)" color="#f7b2bb"/>
+                <use href="#blossom" transform="translate(116 13) rotate(65) scale(1.36)" color="#f9c5cc"/>
+                <use href="#blossom" transform="translate(131 15) rotate(29) scale(1.49)" color="#f28b9b"/>
+                <use href="#blossom" transform="translate(1263 15) rotate(38) scale(0.95)" color="#ef7f91"/>
+                <use href="#blossom" transform="translate(1424 15) rotate(6) scale(1.33)" color="#fbd3d8"/>
+                <use href="#blossom" transform="translate(192 16) rotate(61) scale(1.05)" color="#f28b9b"/>
+                <use href="#blossom" transform="translate(143 18) rotate(3) scale(0.63)" color="#f7b2bb"/>
+                <use href="#blossom" transform="translate(23 18) rotate(15) scale(0.90)" color="#f7b2bb"/>
+                <use href="#blossom" transform="translate(1326 19) rotate(5) scale(0.77)" color="#f28b9b"/>
+                <use href="#blossom" transform="translate(1450 19) rotate(64) scale(1.03)" color="#f7b2bb"/>
+                <use href="#blossom" transform="translate(1420 20) rotate(9) scale(1.16)" color="#ef7f91"/>
+                <use href="#blossom" transform="translate(243 21) rotate(0) scale(0.97)" color="#f7b2bb"/>
+                <use href="#blossom" transform="translate(1324 22) rotate(24) scale(1.06)" color="#f28b9b"/>
+                <use href="#blossom" transform="translate(577 22) rotate(35) scale(1.38)" color="#ffe3e6"/>
+                <use href="#blossom" transform="translate(794 22) rotate(11) scale(1.36)" color="#ffe3e6"/>
+                <use href="#blossom" transform="translate(759 23) rotate(12) scale(1.36)" color="#f9c5cc"/>
+                <use href="#blossom" transform="translate(1249 23) rotate(19) scale(0.98)" color="#f7b2bb"/>
+                <use href="#blossom" transform="translate(191 23) rotate(24) scale(1.21)" color="#f28b9b"/>
+                <use href="#blossom" transform="translate(1227 24) rotate(41) scale(0.98)" color="#f7b2bb"/>
+                <use href="#blossom" transform="translate(46 24) rotate(16) scale(1.02)" color="#fbd3d8"/>
+                <use href="#blossom" transform="translate(43 24) rotate(26) scale(0.85)" color="#ffe3e6"/>
+                <use href="#blossom" transform="translate(1085 24) rotate(35) scale(1.11)" color="#fbd3d8"/>
+                <use href="#blossom" transform="translate(137 25) rotate(3) scale(1.28)" color="#ef7f91"/>
+                <use href="#blossom" transform="translate(139 25) rotate(59) scale(1.57)" color="#ffe3e6"/>
+                <use href="#blossom" transform="translate(1248 26) rotate(47) scale(1.09)" color="#f28b9b"/>
+                <use href="#blossom" transform="translate(344 27) rotate(46) scale(1.45)" color="#f28b9b"/>
+                <use href="#blossom" transform="translate(624 27) rotate(53) scale(0.99)" color="#f28b9b"/>
+                <use href="#blossom" transform="translate(98 27) rotate(48) scale(1.36)" color="#ef7f91"/>
+                <use href="#blossom" transform="translate(1429 28) rotate(57) scale(0.87)" color="#f7b2bb"/>
+                <use href="#blossom" transform="translate(1104 28) rotate(37) scale(1.11)" color="#f7b2bb"/>
+                <use href="#blossom" transform="translate(1110 28) rotate(58) scale(1.49)" color="#ef7f91"/>
+                <use href="#blossom" transform="translate(230 29) rotate(14) scale(1.44)" color="#f9c5cc"/>
+                <use href="#blossom" transform="translate(1297 29) rotate(29) scale(1.44)" color="#f9c5cc"/>
+                <use href="#blossom" transform="translate(1152 29) rotate(61) scale(1.17)" color="#f7b2bb"/>
+                <use href="#blossom" transform="translate(251 29) rotate(38) scale(1.48)" color="#ef7f91"/>
+                <use href="#blossom" transform="translate(1152 29) rotate(38) scale(0.99)" color="#f9c5cc"/>
+                <use href="#blossom" transform="translate(1260 29) rotate(16) scale(0.92)" color="#f9c5cc"/>
+                <use href="#blossom" transform="translate(406 30) rotate(21) scale(1.38)" color="#fbd3d8"/>
+                <use href="#blossom" transform="translate(1333 30) rotate(41) scale(1.19)" color="#f28b9b"/>
+                <use href="#blossom" transform="translate(607 30) rotate(51) scale(1.30)" color="#f28b9b"/>
+                <use href="#blossom" transform="translate(522 30) rotate(20) scale(0.99)" color="#ef7f91"/>
+                <use href="#blossom" transform="translate(654 31) rotate(39) scale(1.35)" color="#f28b9b"/>
+                <use href="#blossom" transform="translate(1338 31) rotate(67) scale(0.70)" color="#fbd3d8"/>
+                <use href="#blossom" transform="translate(182 32) rotate(14) scale(1.04)" color="#ffe3e6"/>
+                <use href="#blossom" transform="translate(596 32) rotate(46) scale(1.35)" color="#ffe3e6"/>
+                <use href="#blossom" transform="translate(385 32) rotate(24) scale(1.33)" color="#ef7f91"/>
+                <use href="#blossom" transform="translate(44 33) rotate(48) scale(1.41)" color="#f5a3ad"/>
+                <use href="#blossom" transform="translate(248 33) rotate(70) scale(1.11)" color="#f28b9b"/>
+                <use href="#blossom" transform="translate(999 33) rotate(32) scale(1.60)" color="#fbd3d8"/>
+                <use href="#blossom" transform="translate(215 33) rotate(35) scale(1.53)" color="#ffe3e6"/>
+                <use href="#blossom" transform="translate(554 34) rotate(20) scale(1.35)" color="#ef7f91"/>
+                <use href="#blossom" transform="translate(156 34) rotate(63) scale(0.63)" color="#f5a3ad"/>
+                <use href="#blossom" transform="translate(928 34) rotate(11) scale(1.30)" color="#f28b9b"/>
+                <use href="#blossom" transform="translate(1337 34) rotate(40) scale(0.80)" color="#fbd3d8"/>
+                <use href="#blossom" transform="translate(1149 34) rotate(63) scale(0.99)" color="#ffe3e6"/>
+                <use href="#blossom" transform="translate(1098 34) rotate(8) scale(0.92)" color="#f5a3ad"/>
+                <use href="#blossom" transform="translate(884 34) rotate(33) scale(1.46)" color="#f7b2bb"/>
+                <use href="#blossom" transform="translate(83 35) rotate(19) scale(0.80)" color="#f7b2bb"/>
+                <use href="#blossom" transform="translate(1433 36) rotate(61) scale(1.04)" color="#f7b2bb"/>
+                <use href="#blossom" transform="translate(552 36) rotate(51) scale(1.07)" color="#ffe3e6"/>
+                <use href="#blossom" transform="translate(891 36) rotate(37) scale(1.47)" color="#f28b9b"/>
+                <use href="#blossom" transform="translate(439 37) rotate(40) scale(1.41)" color="#fbd3d8"/>
+                <use href="#blossom" transform="translate(1341 37) rotate(15) scale(0.78)" color="#f7b2bb"/>
+                <use href="#blossom" transform="translate(462 37) rotate(13) scale(1.59)" color="#f28b9b"/>
+                <use href="#blossom" transform="translate(498 38) rotate(66) scale(1.28)" color="#f9c5cc"/>
+                <use href="#blossom" transform="translate(45 38) rotate(4) scale(1.32)" color="#fbd3d8"/>
+                <use href="#blossom" transform="translate(295 38) rotate(57) scale(1.29)" color="#f28b9b"/>
+                <use href="#blossom" transform="translate(46 40) rotate(15) scale(1.38)" color="#f5a3ad"/>
+                <use href="#blossom" transform="translate(335 42) rotate(18) scale(1.02)" color="#f9c5cc"/>
+                <use href="#blossom" transform="translate(518 42) rotate(60) scale(0.69)" color="#f5a3ad"/>
+                <use href="#blossom" transform="translate(1227 42) rotate(66) scale(1.07)" color="#f7b2bb"/>
+                <use href="#blossom" transform="translate(1307 42) rotate(33) scale(1.21)" color="#f7b2bb"/>
+                <use href="#blossom" transform="translate(382 42) rotate(33) scale(1.29)" color="#f7b2bb"/>
+                <use href="#blossom" transform="translate(434 43) rotate(11) scale(1.12)" color="#f28b9b"/>
+                <use href="#blossom" transform="translate(1138 44) rotate(64) scale(1.44)" color="#f5a3ad"/>
+                <use href="#blossom" transform="translate(306 44) rotate(27) scale(0.94)" color="#fbd3d8"/>
+                <use href="#blossom" transform="translate(1328 45) rotate(12) scale(1.32)" color="#ffe3e6"/>
+                <use href="#blossom" transform="translate(250 45) rotate(55) scale(0.83)" color="#ffe3e6"/>
+                <use href="#blossom" transform="translate(491 47) rotate(45) scale(1.46)" color="#f5a3ad"/>
+                <use href="#blossom" transform="translate(171 47) rotate(2) scale(0.75)" color="#f5a3ad"/>
+                <use href="#blossom" transform="translate(444 47) rotate(14) scale(1.13)" color="#ef7f91"/>
+                <use href="#blossom" transform="translate(1205 48) rotate(46) scale(0.86)" color="#f9c5cc"/>
+                <use href="#blossom" transform="translate(165 48) rotate(50) scale(0.81)" color="#f5a3ad"/>
+                <use href="#blossom" transform="translate(309 49) rotate(33) scale(0.72)" color="#f9c5cc"/>
+                <use href="#blossom" transform="translate(305 50) rotate(57) scale(0.65)" color="#f7b2bb"/>
+                <use href="#blossom" transform="translate(528 50) rotate(16) scale(1.06)" color="#f9c5cc"/>
+                <use href="#blossom" transform="translate(1144 50) rotate(23) scale(1.11)" color="#f7b2bb"/>
+                <use href="#blossom" transform="translate(404 50) rotate(6) scale(1.21)" color="#f5a3ad"/>
+                <use href="#blossom" transform="translate(1089 51) rotate(25) scale(1.07)" color="#ffe3e6"/>
+                <use href="#blossom" transform="translate(105 51) rotate(63) scale(0.94)" color="#f28b9b"/>
+                <use href="#blossom" transform="translate(161 53) rotate(37) scale(0.71)" color="#f9c5cc"/>
+                <use href="#blossom" transform="translate(515 53) rotate(36) scale(0.85)" color="#f7b2bb"/>
+                <use href="#blossom" transform="translate(617 53) rotate(58) scale(1.32)" color="#ef7f91"/>
+                <use href="#blossom" transform="translate(381 53) rotate(31) scale(1.00)" color="#ffe3e6"/>
+                <use href="#blossom" transform="translate(215 58) rotate(68) scale(0.85)" color="#f9c5cc"/>
+                <use href="#blossom" transform="translate(475 58) rotate(36) scale(0.93)" color="#f9c5cc"/>
+                <use href="#blossom" transform="translate(881 59) rotate(7) scale(0.86)" color="#ef7f91"/>
+                <use href="#blossom" transform="translate(337 61) rotate(53) scale(1.45)" color="#f9c5cc"/>
+                <use href="#blossom" transform="translate(1336 62) rotate(51) scale(0.81)" color="#f9c5cc"/>
+                <use href="#blossom" transform="translate(162 62) rotate(38) scale(0.86)" color="#f7b2bb"/>
+                <use href="#blossom" transform="translate(300 63) rotate(9) scale(1.23)" color="#f9c5cc"/>
+                <use href="#blossom" transform="translate(1070 63) rotate(24) scale(1.13)" color="#fbd3d8"/>
+                <use href="#blossom" transform="translate(1403 64) rotate(16) scale(0.93)" color="#ef7f91"/>
+                <use href="#blossom" transform="translate(245 66) rotate(64) scale(1.17)" color="#f28b9b"/>
+                <use href="#blossom" transform="translate(438 66) rotate(19) scale(0.86)" color="#f5a3ad"/>
+                <use href="#blossom" transform="translate(1048 66) rotate(11) scale(1.46)" color="#ef7f91"/>
+                <use href="#blossom" transform="translate(1319 67) rotate(24) scale(0.63)" color="#fbd3d8"/>
+                <use href="#blossom" transform="translate(1116 69) rotate(33) scale(0.72)" color="#ef7f91"/>
+                <use href="#blossom" transform="translate(869 70) rotate(44) scale(1.44)" color="#ef7f91"/>
+                <use href="#blossom" transform="translate(694 71) rotate(40) scale(1.35)" color="#f28b9b"/>
+                <use href="#blossom" transform="translate(1249 71) rotate(58) scale(1.05)" color="#fbd3d8"/>
+                <use href="#blossom" transform="translate(158 72) rotate(54) scale(0.73)" color="#f28b9b"/>
+                <use href="#blossom" transform="translate(795 76) rotate(19) scale(0.74)" color="#f5a3ad"/>
+                <use href="#blossom" transform="translate(530 79) rotate(44) scale(0.67)" color="#f9c5cc"/>
+                <use href="#blossom" transform="translate(298 80) rotate(65) scale(1.01)" color="#fbd3d8"/>
+                <use href="#blossom" transform="translate(795 81) rotate(46) scale(0.73)" color="#f5a3ad"/>
+                <use href="#blossom" transform="translate(902 82) rotate(50) scale(0.86)" color="#ffe3e6"/>
+                <use href="#blossom" transform="translate(1082 85) rotate(44) scale(1.31)" color="#f28b9b"/>
+                <use href="#blossom" transform="translate(1328 87) rotate(42) scale(1.02)" color="#ffe3e6"/>
+                <use href="#blossom" transform="translate(937 91) rotate(50) scale(1.09)" color="#ffe3e6"/>
+                <use href="#blossom" transform="translate(917 91) rotate(13) scale(0.81)" color="#f7b2bb"/>
+                <use href="#blossom" transform="translate(518 93) rotate(37) scale(0.98)" color="#ffe3e6"/>
+                <use href="#blossom" transform="translate(952 95) rotate(55) scale(0.96)" color="#f7b2bb"/>
+                <use href="#blossom" transform="translate(544 96) rotate(31) scale(0.87)" color="#f9c5cc"/>
+                <use href="#blossom" transform="translate(304 96) rotate(64) scale(1.05)" color="#f7b2bb"/>
+                <use href="#blossom" transform="translate(1121 97) rotate(58) scale(0.87)" color="#f28b9b"/>
+                <use href="#blossom" transform="translate(518 97) rotate(15) scale(0.73)" color="#ffe3e6"/>
+                <use href="#blossom" transform="translate(292 99) rotate(25) scale(0.98)" color="#f9c5cc"/>
+                <use href="#blossom" transform="translate(806 101) rotate(58) scale(0.61)" color="#f9c5cc"/>
+                <use href="#blossom" transform="translate(519 103) rotate(57) scale(0.68)" color="#f9c5cc"/>
+                <use href="#blossom" transform="translate(530 104) rotate(2) scale(0.62)" color="#f28b9b"/>
+                <use href="#blossom" transform="translate(1121 106) rotate(39) scale(0.82)" color="#ef7f91"/>
+                <use href="#blossom" transform="translate(791 109) rotate(28) scale(0.85)" color="#ffe3e6"/>
+                <use href="#blossom" transform="translate(1062 109) rotate(27) scale(0.94)" color="#f9c5cc"/>
+                <use href="#blossom" transform="translate(311 111) rotate(33) scale(1.00)" color="#f5a3ad"/>
+                <use href="#blossom" transform="translate(155 115) rotate(30) scale(0.84)" color="#f7b2bb"/>
+                <use href="#blossom" transform="translate(326 115) rotate(11) scale(1.05)" color="#fbd3d8"/>
+                <use href="#blossom" transform="translate(525 118) rotate(19) scale(0.86)" color="#fbd3d8"/>
+                <use href="#blossom" transform="translate(161 126) rotate(53) scale(0.71)" color="#fbd3d8"/>
+                <use href="#blossom" transform="translate(1114 138) rotate(19) scale(0.71)" color="#f7b2bb"/>
+                <use href="#blossom" transform="translate(308 139) rotate(72) scale(0.95)" color="#f5a3ad"/>
+                <use href="#blossom" transform="translate(1142 144) rotate(52) scale(0.81)" color="#fbd3d8"/>
+                <use href="#blossom" transform="translate(1146 145) rotate(67) scale(1.06)" color="#ef7f91"/>
+                <use href="#blossom" transform="translate(528 146) rotate(0) scale(0.85)" color="#f9c5cc"/>
+                <use href="#blossom" transform="translate(1124 148) rotate(35) scale(0.63)" color="#f7b2bb"/>
+                <use href="#blossom" transform="translate(1336 151) rotate(55) scale(1.01)" color="#f9c5cc"/>
+                <use href="#blossom" transform="translate(1145 151) rotate(4) scale(0.72)" color="#fbd3d8"/>
+                <use href="#blossom" transform="translate(325 153) rotate(29) scale(0.89)" color="#f9c5cc"/>
+                <use href="#blossom" transform="translate(538 158) rotate(32) scale(0.61)" color="#f9c5cc"/>
+                <use href="#blossom" transform="translate(785 160) rotate(33) scale(0.97)" color="#ffe3e6"/>
+                <use href="#blossom" transform="translate(322 160) rotate(63) scale(1.09)" color="#ef7f91"/>
+                <use href="#blossom" transform="translate(537 162) rotate(6) scale(0.68)" color="#f5a3ad"/>
+                <use href="#blossom" transform="translate(784 167) rotate(40) scale(0.77)" color="#f9c5cc"/>
+                <use href="#blossom" transform="translate(783 168) rotate(15) scale(0.83)" color="#f7b2bb"/>
+                <use href="#blossom" transform="translate(791 171) rotate(62) scale(0.68)" color="#fbd3d8"/>
+                <use href="#blossom" transform="translate(1146 175) rotate(55) scale(0.86)" color="#fbd3d8"/>
+                <use href="#blossom" transform="translate(1141 189) rotate(24) scale(1.07)" color="#ffe3e6"/>
+                <use href="#blossom" transform="translate(1140 193) rotate(60) scale(0.81)" color="#f7b2bb"/>
+                <use href="#blossom" transform="translate(779 198) rotate(46) scale(0.66)" color="#f5a3ad"/>
+                <use href="#blossom" transform="translate(780 224) rotate(21) scale(0.80)" color="#fbd3d8"/>
+                <use href="#blossom" transform="translate(1139 226) rotate(27) scale(0.91)" color="#f9c5cc"/>
+                <use href="#blossom" transform="translate(788 226) rotate(50) scale(0.79)" color="#ffe3e6"/>
+                <use href="#blossom" transform="translate(1144 229) rotate(58) scale(0.95)" color="#f9c5cc"/>
+                <use href="#blossom" transform="translate(561 232) rotate(55) scale(1.04)" color="#f5a3ad"/>
+                <use href="#blossom" transform="translate(796 234) rotate(17) scale(0.83)" color="#fbd3d8"/>
+                <use href="#blossom" transform="translate(552 235) rotate(63) scale(0.98)" color="#f5a3ad"/>
+                <use href="#blossom" transform="translate(542 236) rotate(29) scale(0.94)" color="#f28b9b"/>
+                <use href="#blossom" transform="translate(771 243) rotate(70) scale(1.07)" color="#f5a3ad"/>
+                <use href="#blossom" transform="translate(792 254) rotate(26) scale(0.73)" color="#f5a3ad"/>
+                <use href="#blossom" transform="translate(798 261) rotate(15) scale(1.02)" color="#f5a3ad"/>
+                <use href="#blossom" transform="translate(562 262) rotate(63) scale(0.82)" color="#f7b2bb"/>
+                <use href="#blossom" transform="translate(546 268) rotate(48) scale(0.60)" color="#f9c5cc"/>
+                <use href="#blossom" transform="translate(766 270) rotate(21) scale(0.88)" color="#ffe3e6"/>
+                <use href="#blossom" transform="translate(795 277) rotate(24) scale(0.67)" color="#f5a3ad"/>
+                <use href="#blossom" transform="translate(782 295) rotate(54) scale(0.99)" color="#f9c5cc"/>
+                <use href="#blossom" transform="translate(783 296) rotate(35) scale(0.81)" color="#ef7f91"/>
             </g>
         </svg>
+        <div class="curtain curtain-left"></div>
+        <div class="curtain curtain-right"></div>
     </div>
 
     <!-- falling sakura (night) or leaves and summer flowers (day):
@@ -100,7 +351,7 @@
     <canvas id="sky-back" class="sky" aria-hidden="true"></canvas>
     <canvas id="sky-front" class="sky sky-front" aria-hidden="true"></canvas>
 
-    <div class="side-caption" aria-hidden="true">Bao-Ngoc Dao &nbsp;·&nbsp; <span class="cap-night">Cherry Blossom</span><span class="cap-day">Summer Garden</span></div>
+    <div class="side-caption" aria-hidden="true">Bao-Ngoc Dao &nbsp;·&nbsp; <span class="cap-night">Cherry Blossom</span><span class="cap-day">Blossom Pavilion</span></div>
 
     <main class="page">
         <header class="profile-header">
@@ -325,7 +576,7 @@
     </main>
 
     <div class="corner-controls">
-        <button type="button" class="theme-toggle" role="switch" aria-checked="false" aria-label="Daylight theme" title="Switch to summer daylight">
+        <button type="button" class="theme-toggle" role="switch" aria-checked="false" aria-label="Blossom pavilion theme" title="Switch to the sunlit blossom pavilion">
             <span class="tt-icon tt-moon" aria-hidden="true"><i class="fas fa-moon"></i></span>
             <span class="tt-icon tt-sun" aria-hidden="true"><i class="fas fa-sun"></i></span>
             <span class="tt-knob" aria-hidden="true"></span>
