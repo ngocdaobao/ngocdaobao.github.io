@@ -34,9 +34,6 @@
     --frame-a: #e3e8f0;
     --frame-b: #dfe3ee;
     --frame-c: #f6d3de;
-    --thumb-sakura: linear-gradient(160deg, #9aa8bd 0%, #c7a5b9 70%, #e8a3b7 100%);
-    --thumb-slate: linear-gradient(160deg, #8796ad, #6c7c96);
-    --thumb-gold: linear-gradient(160deg, #7a8aa3 0%, #a7a79c 70%, #d7c27f 100%);
 
     --hero-ink: #ffffff;
     --hero-glow: 0 2px 18px rgba(44, 54, 90, 0.35);
@@ -94,9 +91,6 @@
     --frame-a: #f6fbe6;
     --frame-b: #e0f2c8;
     --frame-c: #b9e08a;
-    --thumb-sakura: linear-gradient(160deg, #5aa845 0%, #a3d45a 60%, #d6e86a 100%);
-    --thumb-slate: linear-gradient(160deg, #5aa845, #2f6f34);
-    --thumb-gold: linear-gradient(160deg, #4f9a3f 0%, #8fbf3f 60%, #c9c94a 100%);
 
     --hero-ink: #1f4a25;
     --hero-glow: 0 0 22px rgba(255, 255, 240, 0.85);
@@ -902,64 +896,6 @@ a:hover {
     box-shadow: var(--shadow-hover);
 }
 
-/* venue tile, styled after the card: twilight gradient with a blossom */
-.pub-thumb {
-    position: relative;
-    flex: 0 0 190px;
-    height: 120px;
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-end;
-    padding: 12px 14px;
-    border-radius: 14px;
-    overflow: hidden;
-    color: #fff;
-    background: var(--thumb-slate);
-    background-size: auto;
-    transition: transform 0.4s ease;
-}
-
-.pub-thumb[data-tone="sakura"] { background: var(--thumb-sakura); }
-.pub-thumb[data-tone="gold"] { background: var(--thumb-gold); }
-
-.pub-thumb::before {
-    content: "✿";
-    position: absolute;
-    right: -14px;
-    top: -26px;
-    font-size: 110px;
-    line-height: 1;
-    color: rgba(255, 255, 255, 0.28);
-    transition: transform 1.2s cubic-bezier(0.22, 1, 0.36, 1);
-}
-
-.pub-thumb:hover { color: #fff; background-size: auto; }
-.publication:hover .pub-thumb::before { transform: rotate(144deg); }
-
-.pub-thumb img {
-    position: absolute;
-    inset: 0;
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-}
-
-.thumb-venue {
-    position: relative;
-    font-family: 'Cormorant Garamond', Georgia, serif;
-    font-size: 1.55rem;
-    font-weight: 700;
-    line-height: 1.05;
-    text-shadow: 0 1px 6px rgba(44, 54, 73, 0.3);
-}
-
-.thumb-year {
-    position: relative;
-    font-size: 0.75rem;
-    letter-spacing: 0.35em;
-    opacity: 0.9;
-}
-
 .pub-body { flex: 1; min-width: 0; }
 
 .pub-body > a { background-image: none; }
@@ -1216,8 +1152,6 @@ html.theme-anim .page *::after {
     .tl-item:nth-child(even) .tl-node { left: 0; right: auto; }
     .tl-card { text-align: left; }
 
-    .publication { flex-direction: column; }
-    .pub-thumb { flex-basis: auto; width: 100%; height: 96px; }
 }
 
 @media (prefers-reduced-motion: reduce) {
