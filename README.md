@@ -24,3 +24,4 @@ Personal academic homepage: a cherry-blossom night theme with falling sakura pet
 - Colors are CSS variables at the top of `style.css`.
 - Petal density and speed are set in `populate()` and `makePetal()` in `script.js`.
 - The moon/sun switch toggles between the cherry-blossom night and a green summer day (`data-theme="night|day"` on `<html>`). Day colors are in the `:root[data-theme="day"]` block of `style.css`; its scene (sun, sunbeam) is the `.scene-day` block in `index.html`, and the bubbles live in `script.js`.
+- The opening screen (`<section class="hero">`) holds the wind-chime menu. Each `<a class="chime">` links to a section id (`#about`, `#experience`, `#publications`); `--len` sets its string length and `data-note` its chime pitch in Hz. Copy one to add a menu item.

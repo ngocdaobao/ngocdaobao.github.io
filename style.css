@@ -37,6 +37,13 @@
     --thumb-sakura: linear-gradient(160deg, #9aa8bd 0%, #c7a5b9 70%, #e8a3b7 100%);
     --thumb-slate: linear-gradient(160deg, #8796ad, #6c7c96);
     --thumb-gold: linear-gradient(160deg, #7a8aa3 0%, #a7a79c 70%, #d7c27f 100%);
+
+    --hero-ink: #ffffff;
+    --hero-glow: 0 2px 18px rgba(44, 54, 90, 0.35);
+    --string: rgba(255, 255, 255, 0.75);
+    --strip-a: #f6cbd8;
+    --strip-b: #fff7fa;
+    --strip-ink: #8a3a57;
 }
 
 /* Summer daylight: sunny greens with fresh leaf and lime accents */
@@ -77,6 +84,13 @@
     --thumb-sakura: linear-gradient(160deg, #5aa845 0%, #a3d45a 60%, #d6e86a 100%);
     --thumb-slate: linear-gradient(160deg, #5aa845, #2f6f34);
     --thumb-gold: linear-gradient(160deg, #4f9a3f 0%, #8fbf3f 60%, #c9c94a 100%);
+
+    --hero-ink: #1f4a25;
+    --hero-glow: 0 0 22px rgba(255, 255, 240, 0.85);
+    --string: rgba(255, 255, 255, 0.9);
+    --strip-a: #cfe9a8;
+    --strip-b: #fbfff4;
+    --strip-ink: #2f6f34;
 }
 
 * { box-sizing: border-box; }
@@ -230,6 +244,159 @@ body {
     -webkit-backdrop-filter: blur(14px) saturate(120%);
     backdrop-filter: blur(14px) saturate(120%);
 }
+
+/* ---------- opening screen with the wind-chime menu ---------- */
+.hero {
+    position: relative;
+    z-index: 2;
+    min-height: 100vh;
+    min-height: 100svh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 0 16px 90px;
+}
+
+.chimes {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    gap: clamp(26px, 9vw, 140px);
+}
+
+/* each chime swings from the top of its string; script.js drives the rotation */
+.chime {
+    --bell: clamp(78px, 9vw, 112px);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    transform-origin: 50% 0;
+    color: inherit;
+    background-image: none;
+    -webkit-tap-highlight-color: transparent;
+    animation: chimeDrop 1.4s cubic-bezier(0.34, 1.4, 0.64, 1) both;
+}
+
+.chime:nth-child(2) { animation-delay: 0.15s; }
+.chime:nth-child(3) { animation-delay: 0.3s; }
+
+.chime:hover { background-image: none; }
+
+.chime-string {
+    width: 1.2px;
+    height: var(--len);
+    background: linear-gradient(180deg, transparent, var(--string) 25%);
+}
+
+.chime-bell {
+    width: var(--bell);
+    height: var(--bell);
+    margin-top: calc(var(--bell) * -0.1);
+    overflow: visible;
+    filter: drop-shadow(0 6px 14px rgba(40, 50, 80, 0.18));
+    transition: filter 0.4s ease, transform 0.4s ease;
+}
+
+.chime-cord {
+    width: 1.2px;
+    height: calc(var(--bell) * 0.22);
+    margin-top: -1px;
+    background: var(--string);
+}
+
+.chime-strip {
+    position: relative;
+    width: calc(var(--bell) * 0.52);
+    height: max(calc(var(--bell) * 1.55), 150px);
+    display: flex;
+    justify-content: center;
+    padding-top: 12px;
+    border-radius: 2px 2px 4px 4px;
+    background: linear-gradient(180deg, var(--strip-a), var(--strip-b) 88%);
+    box-shadow: 0 8px 18px rgba(40, 50, 80, 0.14), inset 0 0 0 1px rgba(255, 255, 255, 0.55);
+    transform-origin: 50% 0;
+    transition: box-shadow 0.4s ease;
+}
+
+.chime-label {
+    writing-mode: vertical-rl;
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-size: clamp(1rem, 1.3vw, 1.2rem);
+    font-weight: 700;
+    letter-spacing: 0.14em;
+    color: var(--strip-ink);
+    white-space: nowrap;
+}
+
+.chime:hover .chime-bell,
+.chime:focus-visible .chime-bell {
+    filter: drop-shadow(0 0 16px rgba(255, 255, 255, 0.9)) drop-shadow(0 6px 14px rgba(40, 50, 80, 0.18));
+}
+
+.chime:hover .chime-strip,
+.chime:focus-visible .chime-strip {
+    box-shadow: 0 10px 26px rgba(40, 50, 80, 0.22), inset 0 0 0 1px rgba(255, 255, 255, 0.8), 0 0 18px rgba(255, 255, 255, 0.6);
+}
+
+.chime:focus-visible { outline: none; }
+.chime:focus-visible .chime-label { text-decoration: underline; text-underline-offset: 4px; }
+
+.hero-title {
+    margin-block: auto;
+    padding-top: 40px;
+    text-align: center;
+    color: var(--hero-ink);
+    text-shadow: var(--hero-glow);
+    animation: fadeIn 1.4s ease 0.5s both;
+}
+
+.hero-name {
+    margin: 0;
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-size: clamp(3rem, 9vw, 6.8rem);
+    font-weight: 600;
+    line-height: 1;
+    letter-spacing: 0.02em;
+    color: var(--hero-ink);
+}
+
+.hero-sub {
+    margin: 12px 0 0;
+    font-size: clamp(0.85rem, 1.4vw, 1.05rem);
+    letter-spacing: 0.4em;
+    opacity: 0.9;
+}
+
+.hero-tag {
+    margin: 18px 0 0;
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-style: italic;
+    font-size: clamp(1.05rem, 2vw, 1.4rem);
+    opacity: 0.92;
+}
+
+.scroll-cue {
+    position: absolute;
+    left: 50%;
+    bottom: 26px;
+    transform: translateX(-50%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2px;
+    font-size: 0.72rem;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--hero-ink);
+    text-shadow: var(--hero-glow);
+    background-image: none;
+    opacity: 0.85;
+    animation: cue 2.4s ease-in-out infinite;
+}
+
+.scroll-cue:hover { color: var(--hero-ink); background-image: none; opacity: 1; }
+
+#about, #experience, #publications { scroll-margin-top: 24px; }
 
 /* ---------- headings ---------- */
 h1, h2, h3 { color: var(--ink); }
@@ -949,6 +1116,16 @@ html.theme-anim .page *::after {
     transition: color 0.7s ease, background-color 0.7s ease, border-color 0.7s ease, fill 0.7s ease, stop-color 0.7s ease !important;
 }
 
+@keyframes chimeDrop {
+    from { opacity: 0; transform: translateY(-60px) rotate(4deg); }
+    to { opacity: 1; transform: none; }
+}
+
+@keyframes cue {
+    0%, 100% { transform: translate(-50%, 0); }
+    50% { transform: translate(-50%, 6px); }
+}
+
 @keyframes moonFloat {
     0%, 100% { transform: translateY(0); }
     50% { transform: translateY(8px); }
@@ -968,6 +1145,10 @@ html.theme-anim .page *::after {
     .bio-text { text-align: left; }
     .moon,
     .sun { width: 72px; height: 72px; top: 14px; right: 14px; }
+    .chime { --bell: 70px; }
+    .chime-label { font-size: 0.95rem; letter-spacing: 0.1em; }
+    .scroll-cue { bottom: 84px; }
+    .chimes { gap: 22px; }
 
     .timeline::before { left: 11px; }
     .tl-item,

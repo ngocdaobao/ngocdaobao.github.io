@@ -74,8 +74,101 @@
 
     <div class="side-caption" aria-hidden="true">Bao-Ngoc Dao &nbsp;·&nbsp; <span class="cap-night">Cherry Blossom</span><span class="cap-day">Summer Vibes</span></div>
 
+    <!-- opening screen: name + a wind-chime menu (one glass chime per section) -->
+    <section class="hero" id="top">
+        <svg width="0" height="0" style="position:absolute" aria-hidden="true">
+            <defs>
+                <path id="bellShape" d="M50 12 C74 12 90 30 90 54 C90 66 86 74 82 78 L18 78 C14 74 10 66 10 54 C10 30 26 12 50 12 Z"/>
+                <clipPath id="bellClip"><use href="#bellShape"/></clipPath>
+                <radialGradient id="glassBody" cx="40%" cy="35%" r="70%">
+                    <stop offset="0" stop-color="#ffffff" stop-opacity=".1"/>
+                    <stop offset=".7" stop-color="#ffffff" stop-opacity=".18"/>
+                    <stop offset="1" stop-color="#ffffff" stop-opacity=".55"/>
+                </radialGradient>
+                <filter id="irid" x="-20%" y="-20%" width="140%" height="140%"><feGaussianBlur stdDeviation="5"/></filter>
+            </defs>
+        </svg>
+
+        <nav class="chimes" aria-label="Main menu">
+            <a class="chime" href="#about" style="--len: 15vh; --sway-delay: -1.2s" data-note="1046.5">
+                <span class="chime-string"></span>
+                <svg class="chime-bell" viewBox="0 0 100 100" aria-hidden="true">
+                    <use href="#bellShape" fill="url(#glassBody)"/>
+                    <g clip-path="url(#bellClip)" filter="url(#irid)">
+                        <ellipse cx="34" cy="40" rx="20" ry="16" fill="#ffb3d1" opacity=".55"/>
+                        <ellipse cx="66" cy="48" rx="18" ry="20" fill="#9ee8ff" opacity=".5"/>
+                        <ellipse cx="50" cy="68" rx="24" ry="10" fill="#fff3a6" opacity=".5"/>
+                        <ellipse cx="28" cy="64" rx="12" ry="10" fill="#d5b8ff" opacity=".45"/>
+                    </g>
+                    <use href="#bellShape" fill="none" stroke="#ffffff" stroke-opacity=".85" stroke-width="1.4"/>
+                    <line x1="50" y1="14" x2="50" y2="100" stroke="#ffffff" stroke-opacity=".85" stroke-width="1"/>
+                    <circle cx="50" cy="72" r="3.6" fill="#ffffff" fill-opacity=".85"/>
+                    <ellipse cx="50" cy="78" rx="32" ry="5" fill="#ffffff" fill-opacity=".22" stroke="#ffffff" stroke-opacity=".9" stroke-width="1.2"/>
+                    <path d="M27 34 C31 25 38 20 45 18" fill="none" stroke="#ffffff" stroke-width="3" stroke-linecap="round" opacity=".9"/>
+                    <circle cx="70" cy="30" r="2.2" fill="#ffffff" opacity=".9"/>
+                    <circle cx="50" cy="11" r="4" fill="#ffffff" fill-opacity=".9"/>
+                </svg>
+                <span class="chime-cord"></span>
+                <span class="chime-strip"><span class="chime-label">About Me</span></span>
+            </a>
+            <a class="chime" href="#experience" style="--len: 25vh; --sway-delay: -3.1s" data-note="1318.5">
+                <span class="chime-string"></span>
+                <svg class="chime-bell" viewBox="0 0 100 100" aria-hidden="true">
+                    <use href="#bellShape" fill="url(#glassBody)"/>
+                    <g clip-path="url(#bellClip)" filter="url(#irid)">
+                        <ellipse cx="34" cy="40" rx="20" ry="16" fill="#ffb3d1" opacity=".55"/>
+                        <ellipse cx="66" cy="48" rx="18" ry="20" fill="#9ee8ff" opacity=".5"/>
+                        <ellipse cx="50" cy="68" rx="24" ry="10" fill="#fff3a6" opacity=".5"/>
+                        <ellipse cx="28" cy="64" rx="12" ry="10" fill="#d5b8ff" opacity=".45"/>
+                    </g>
+                    <use href="#bellShape" fill="none" stroke="#ffffff" stroke-opacity=".85" stroke-width="1.4"/>
+                    <line x1="50" y1="14" x2="50" y2="100" stroke="#ffffff" stroke-opacity=".85" stroke-width="1"/>
+                    <circle cx="50" cy="72" r="3.6" fill="#ffffff" fill-opacity=".85"/>
+                    <ellipse cx="50" cy="78" rx="32" ry="5" fill="#ffffff" fill-opacity=".22" stroke="#ffffff" stroke-opacity=".9" stroke-width="1.2"/>
+                    <path d="M27 34 C31 25 38 20 45 18" fill="none" stroke="#ffffff" stroke-width="3" stroke-linecap="round" opacity=".9"/>
+                    <circle cx="70" cy="30" r="2.2" fill="#ffffff" opacity=".9"/>
+                    <circle cx="50" cy="11" r="4" fill="#ffffff" fill-opacity=".9"/>
+                </svg>
+                <span class="chime-cord"></span>
+                <span class="chime-strip"><span class="chime-label">Experience</span></span>
+            </a>
+            <a class="chime" href="#publications" style="--len: 19vh; --sway-delay: -2.2s" data-note="1568">
+                <span class="chime-string"></span>
+                <svg class="chime-bell" viewBox="0 0 100 100" aria-hidden="true">
+                    <use href="#bellShape" fill="url(#glassBody)"/>
+                    <g clip-path="url(#bellClip)" filter="url(#irid)">
+                        <ellipse cx="34" cy="40" rx="20" ry="16" fill="#ffb3d1" opacity=".55"/>
+                        <ellipse cx="66" cy="48" rx="18" ry="20" fill="#9ee8ff" opacity=".5"/>
+                        <ellipse cx="50" cy="68" rx="24" ry="10" fill="#fff3a6" opacity=".5"/>
+                        <ellipse cx="28" cy="64" rx="12" ry="10" fill="#d5b8ff" opacity=".45"/>
+                    </g>
+                    <use href="#bellShape" fill="none" stroke="#ffffff" stroke-opacity=".85" stroke-width="1.4"/>
+                    <line x1="50" y1="14" x2="50" y2="100" stroke="#ffffff" stroke-opacity=".85" stroke-width="1"/>
+                    <circle cx="50" cy="72" r="3.6" fill="#ffffff" fill-opacity=".85"/>
+                    <ellipse cx="50" cy="78" rx="32" ry="5" fill="#ffffff" fill-opacity=".22" stroke="#ffffff" stroke-opacity=".9" stroke-width="1.2"/>
+                    <path d="M27 34 C31 25 38 20 45 18" fill="none" stroke="#ffffff" stroke-width="3" stroke-linecap="round" opacity=".9"/>
+                    <circle cx="70" cy="30" r="2.2" fill="#ffffff" opacity=".9"/>
+                    <circle cx="50" cy="11" r="4" fill="#ffffff" fill-opacity=".9"/>
+                </svg>
+                <span class="chime-cord"></span>
+                <span class="chime-strip"><span class="chime-label">Publications</span></span>
+            </a>
+        </nav>
+
+        <div class="hero-title">
+            <h1 class="hero-name">Bao-Ngoc Dao</h1>
+            <p class="hero-sub">Đào Bảo Ngọc</p>
+            <p class="hero-tag">Continual Learning &nbsp;·&nbsp; Efficient VLA &nbsp;·&nbsp; Robot Learning</p>
+        </div>
+
+        <a class="scroll-cue" href="#about" aria-label="Scroll to About Me">
+            <span>scroll</span>
+            <i class="fas fa-chevron-down" aria-hidden="true"></i>
+        </a>
+    </section>
+
     <main class="page">
-        <header class="profile-header">
+        <header class="profile-header" id="about">
             <div class="profile-left glass">
                 <svg class="sakura-frame" viewBox="0 0 200 200" role="img" aria-label="Bao-Ngoc Dao">
                     <defs>
@@ -148,7 +241,7 @@
             </div>
         </header>
 
-        <section class="timeline-section glass">
+        <section class="timeline-section glass" id="experience">
             <h2>Experience &amp; Education</h2>
             <ol class="timeline">
                 <li class="tl-item tl-current" data-accent="sakura">
@@ -204,7 +297,7 @@
             </ol>
         </section>
 
-        <section class="projects-section glass">
+        <section class="projects-section glass" id="publications">
             <h2>Publications</h2>
             <p class="pub-hint">* denotes equal contribution</p>
             <div class="projects-grid">

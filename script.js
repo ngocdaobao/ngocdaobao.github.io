@@ -511,3 +511,130 @@ document.querySelectorAll('.bib-toggle').forEach((btn) => {
 
     setRunning(startOn);
 })();
+
+// ---------- wind-chime menu ----------
+(function windChimes() {
+    const chimes = [...document.querySelectorAll('.chime')];
+    if (!chimes.length) return;
+    const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    // a soft glass "ting": a bright fundamental plus an inharmonic bell partial
+    let audio = null;
+    const unlock = () => {
+        if (!audio) {
+            try { audio = new (window.AudioContext || window.webkitAudioContext)(); } catch (e) { audio = null; }
+        }
+        if (audio && audio.state === 'suspended') audio.resume();
+    };
+    window.addEventListener('pointerdown', unlock, { passive: true });
+    window.addEventListener('keydown', unlock);
+
+    function ting(freq, strength) {
+        if (!audio || audio.state !== 'running') return;
+        const now = audio.currentTime;
+        const out = audio.createGain();
+        out.gain.setValueAtTime(0, now);
+        out.gain.linearRampToValueAtTime(0.06 * strength, now + 0.005);
+        out.gain.exponentialRampToValueAtTime(0.0001, now + 2.2);
+        out.connect(audio.destination);
+        [[1, 1], [2.76, 0.35], [5.4, 0.12]].forEach(([mult, level]) => {
+            const osc = audio.createOscillator();
+            const g = audio.createGain();
+            osc.type = 'sine';
+            osc.frequency.value = freq * mult;
+            g.gain.value = level;
+            osc.connect(g).connect(out);
+            osc.start(now);
+            osc.stop(now + 2.3);
+        });
+    }
+
+    const state = chimes.map((el, i) => ({
+        el,
+        strip: el.querySelector('.chime-strip'),
+        note: parseFloat(el.dataset.note) || 1200,
+        a: 0, v: 0,   // chime angle / velocity (radians, per frame)
+        s: 0, sv: 0,  // strip angle relative to the bell
+        seed: i * 1.7,
+        inside: false,
+        ready: false,
+        lastTing: 0,
+    }));
+
+    // let the drop-in entrance finish before the physics takes over the transform
+    state.forEach((c) => {
+        const takeOver = () => {
+            if (c.ready) return;
+            c.el.style.animation = 'none';
+            c.ready = true;
+        };
+        c.el.addEventListener('animationend', takeOver, { once: true });
+        setTimeout(takeOver, 2200); // in case the animation never reports its end
+    });
+
+    function strike(c, force) {
+        const now = performance.now();
+        if (now - c.lastTing > 250) {
+            ting(c.note, Math.min(1, 0.4 + Math.abs(force) * 40));
+            c.lastTing = now;
+        }
+    }
+
+    let px = null, pvx = 0;
+    window.addEventListener('pointermove', (e) => {
+        pvx = px === null ? 0 : e.clientX - px;
+        px = e.clientX;
+        state.forEach((c) => {
+            const r = c.el.getBoundingClientRect();
+            const hit = e.clientX > r.left - 6 && e.clientX < r.right + 6 && e.clientY > r.top + r.height * 0.3 && e.clientY < r.bottom + 6;
+            if (hit && Math.abs(pvx) > 0.5) {
+                const push = Math.max(-0.03, Math.min(0.03, pvx * 0.0012));
+                c.v += push;
+                c.sv += push * 2.2;
+                if (!c.inside && Math.abs(pvx) > 3) strike(c, push);
+            }
+            c.inside = hit;
+        });
+    }, { passive: true });
+
+    chimes.forEach((el, i) => {
+        el.addEventListener('click', () => {
+            unlock();
+            const c = state[i];
+            c.v += (Math.random() < 0.5 ? -1 : 1) * 0.025;
+            c.sv += c.v * 2;
+            // the context may only just have resumed; ring a moment later
+            setTimeout(() => ting(c.note, 1), audio && audio.state === 'running' ? 0 : 60);
+        });
+    });
+
+    if (reduceMotion) return;
+
+    let t = 0, visible = true, raf = 0;
+    function frame() {
+        t++;
+        state.forEach((c) => {
+            // a gentle, uneven breeze
+            const gust = Math.sin(t * 0.013 + c.seed) * 0.00022 + Math.sin(t * 0.0047 + c.seed * 2.3) * 0.00016;
+            const acc = -0.0035 * c.a - 0.018 * c.v + gust;
+            c.v += acc;
+            c.a += c.v;
+            // the paper strip trails behind the bell and flutters a little more
+            const sacc = -0.012 * c.s - 0.05 * c.sv - acc * 1.8 + gust * 2.5;
+            c.sv += sacc;
+            c.s += c.sv;
+            if (c.ready) c.el.style.transform = `rotate(${c.a}rad)`;
+            c.strip.style.transform = `rotate(${c.s}rad)`;
+        });
+        raf = visible && !document.hidden ? requestAnimationFrame(frame) : 0;
+    }
+
+    const hero = document.querySelector('.hero');
+    new IntersectionObserver(([entry]) => {
+        visible = entry.isIntersecting;
+        if (visible && !raf) raf = requestAnimationFrame(frame);
+    }).observe(hero);
+    document.addEventListener('visibilitychange', () => {
+        if (!document.hidden && visible && !raf) raf = requestAnimationFrame(frame);
+    });
+})();
