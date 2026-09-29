@@ -80,12 +80,19 @@
             <defs>
                 <path id="bellShape" d="M50 12 C74 12 90 30 90 54 C90 66 86 74 82 78 L18 78 C14 74 10 66 10 54 C10 30 26 12 50 12 Z"/>
                 <clipPath id="bellClip"><use href="#bellShape"/></clipPath>
-                <radialGradient id="glassBody" cx="40%" cy="35%" r="70%">
-                    <stop offset="0" stop-color="#ffffff" stop-opacity=".1"/>
-                    <stop offset=".7" stop-color="#ffffff" stop-opacity=".18"/>
-                    <stop offset="1" stop-color="#ffffff" stop-opacity=".55"/>
+                <!-- moonlit glass: cool and silvery, lit from the top right -->
+                <radialGradient id="glassNight" cx="64%" cy="30%" r="75%">
+                    <stop offset="0" stop-color="#eef3ff" stop-opacity=".4"/>
+                    <stop offset=".55" stop-color="#b9c8e8" stop-opacity=".12"/>
+                    <stop offset="1" stop-color="#dfe8ff" stop-opacity=".5"/>
                 </radialGradient>
-                <filter id="irid" x="-20%" y="-20%" width="140%" height="140%"><feGaussianBlur stdDeviation="5"/></filter>
+                <!-- sunlit glass: clear and bright, with a warm core -->
+                <radialGradient id="glassDay" cx="64%" cy="30%" r="75%">
+                    <stop offset="0" stop-color="#fffbe0" stop-opacity=".85"/>
+                    <stop offset=".45" stop-color="#ffffff" stop-opacity=".2"/>
+                    <stop offset="1" stop-color="#ffffff" stop-opacity=".8"/>
+                </radialGradient>
+                <filter id="irid" x="-30%" y="-30%" width="160%" height="160%"><feGaussianBlur stdDeviation="7"/></filter>
             </defs>
         </svg>
 
@@ -93,20 +100,26 @@
             <a class="chime" href="#about" style="--len: 15vh; --sway-delay: -1.2s" data-note="1046.5">
                 <span class="chime-string"></span>
                 <svg class="chime-bell" viewBox="0 0 100 100" aria-hidden="true">
-                    <use href="#bellShape" fill="url(#glassBody)"/>
+                    <ellipse class="bell-caustic" cx="50" cy="86" rx="24" ry="5" filter="url(#irid)"/>
+                    <use href="#bellShape" class="bell-body"/>
                     <g clip-path="url(#bellClip)" filter="url(#irid)">
-                        <ellipse cx="34" cy="40" rx="20" ry="16" fill="#ffb3d1" opacity=".55"/>
-                        <ellipse cx="66" cy="48" rx="18" ry="20" fill="#9ee8ff" opacity=".5"/>
-                        <ellipse cx="50" cy="68" rx="24" ry="10" fill="#fff3a6" opacity=".5"/>
-                        <ellipse cx="28" cy="64" rx="12" ry="10" fill="#d5b8ff" opacity=".45"/>
+                        <ellipse class="tint tint-1" cx="32" cy="46" rx="20" ry="16"/>
+                        <ellipse class="tint tint-2" cx="58" cy="62" rx="22" ry="12"/>
+                        <ellipse class="tint tint-3" cx="68" cy="30" rx="16" ry="14"/>
+                        <ellipse class="tint tint-4" cx="30" cy="66" rx="14" ry="9"/>
                     </g>
-                    <use href="#bellShape" fill="none" stroke="#ffffff" stroke-opacity=".85" stroke-width="1.4"/>
-                    <line x1="50" y1="14" x2="50" y2="100" stroke="#ffffff" stroke-opacity=".85" stroke-width="1"/>
-                    <circle cx="50" cy="72" r="3.6" fill="#ffffff" fill-opacity=".85"/>
-                    <ellipse cx="50" cy="78" rx="32" ry="5" fill="#ffffff" fill-opacity=".22" stroke="#ffffff" stroke-opacity=".9" stroke-width="1.2"/>
-                    <path d="M27 34 C31 25 38 20 45 18" fill="none" stroke="#ffffff" stroke-width="3" stroke-linecap="round" opacity=".9"/>
-                    <circle cx="70" cy="30" r="2.2" fill="#ffffff" opacity=".9"/>
-                    <circle cx="50" cy="11" r="4" fill="#ffffff" fill-opacity=".9"/>
+                    <use href="#bellShape" class="bell-edge" fill="none" stroke-width="1.4"/>
+                    <line x1="50" y1="14" x2="50" y2="100" class="bell-line" stroke-width="1"/>
+                    <circle cx="50" cy="72" r="3.6" class="bell-bead"/>
+                    <ellipse cx="50" cy="78" rx="32" ry="5" class="bell-rim" stroke-width="1.2"/>
+                    <!-- reflections face the moon / sun (top right); script.js keeps them pointed there as the chime swings -->
+                    <g class="bell-spec">
+                        <path d="M56 18 C64 20 71 25 75 33" fill="none" stroke-width="3.2" stroke-linecap="round"/>
+                        <circle cx="78" cy="40" r="2.4"/>
+                        <path class="glint-star" d="M70 12 Q71 22 80 23 Q71 24 70 34 Q69 24 60 23 Q69 22 70 12Z"/>
+                        <path d="M22 50 C22 42 25 35 29 30" fill="none" stroke-width="1.6" stroke-linecap="round" class="spec-soft"/>
+                    </g>
+                    <circle cx="50" cy="11" r="4" class="bell-knob"/>
                 </svg>
                 <span class="chime-cord"></span>
                 <span class="chime-strip"><span class="chime-label">About Me</span></span>
@@ -114,20 +127,26 @@
             <a class="chime" href="#experience" style="--len: 25vh; --sway-delay: -3.1s" data-note="1318.5">
                 <span class="chime-string"></span>
                 <svg class="chime-bell" viewBox="0 0 100 100" aria-hidden="true">
-                    <use href="#bellShape" fill="url(#glassBody)"/>
+                    <ellipse class="bell-caustic" cx="50" cy="86" rx="24" ry="5" filter="url(#irid)"/>
+                    <use href="#bellShape" class="bell-body"/>
                     <g clip-path="url(#bellClip)" filter="url(#irid)">
-                        <ellipse cx="34" cy="40" rx="20" ry="16" fill="#ffb3d1" opacity=".55"/>
-                        <ellipse cx="66" cy="48" rx="18" ry="20" fill="#9ee8ff" opacity=".5"/>
-                        <ellipse cx="50" cy="68" rx="24" ry="10" fill="#fff3a6" opacity=".5"/>
-                        <ellipse cx="28" cy="64" rx="12" ry="10" fill="#d5b8ff" opacity=".45"/>
+                        <ellipse class="tint tint-1" cx="32" cy="46" rx="20" ry="16"/>
+                        <ellipse class="tint tint-2" cx="58" cy="62" rx="22" ry="12"/>
+                        <ellipse class="tint tint-3" cx="68" cy="30" rx="16" ry="14"/>
+                        <ellipse class="tint tint-4" cx="30" cy="66" rx="14" ry="9"/>
                     </g>
-                    <use href="#bellShape" fill="none" stroke="#ffffff" stroke-opacity=".85" stroke-width="1.4"/>
-                    <line x1="50" y1="14" x2="50" y2="100" stroke="#ffffff" stroke-opacity=".85" stroke-width="1"/>
-                    <circle cx="50" cy="72" r="3.6" fill="#ffffff" fill-opacity=".85"/>
-                    <ellipse cx="50" cy="78" rx="32" ry="5" fill="#ffffff" fill-opacity=".22" stroke="#ffffff" stroke-opacity=".9" stroke-width="1.2"/>
-                    <path d="M27 34 C31 25 38 20 45 18" fill="none" stroke="#ffffff" stroke-width="3" stroke-linecap="round" opacity=".9"/>
-                    <circle cx="70" cy="30" r="2.2" fill="#ffffff" opacity=".9"/>
-                    <circle cx="50" cy="11" r="4" fill="#ffffff" fill-opacity=".9"/>
+                    <use href="#bellShape" class="bell-edge" fill="none" stroke-width="1.4"/>
+                    <line x1="50" y1="14" x2="50" y2="100" class="bell-line" stroke-width="1"/>
+                    <circle cx="50" cy="72" r="3.6" class="bell-bead"/>
+                    <ellipse cx="50" cy="78" rx="32" ry="5" class="bell-rim" stroke-width="1.2"/>
+                    <!-- reflections face the moon / sun (top right); script.js keeps them pointed there as the chime swings -->
+                    <g class="bell-spec">
+                        <path d="M56 18 C64 20 71 25 75 33" fill="none" stroke-width="3.2" stroke-linecap="round"/>
+                        <circle cx="78" cy="40" r="2.4"/>
+                        <path class="glint-star" d="M70 12 Q71 22 80 23 Q71 24 70 34 Q69 24 60 23 Q69 22 70 12Z"/>
+                        <path d="M22 50 C22 42 25 35 29 30" fill="none" stroke-width="1.6" stroke-linecap="round" class="spec-soft"/>
+                    </g>
+                    <circle cx="50" cy="11" r="4" class="bell-knob"/>
                 </svg>
                 <span class="chime-cord"></span>
                 <span class="chime-strip"><span class="chime-label">Experience</span></span>
@@ -135,20 +154,26 @@
             <a class="chime" href="#publications" style="--len: 19vh; --sway-delay: -2.2s" data-note="1568">
                 <span class="chime-string"></span>
                 <svg class="chime-bell" viewBox="0 0 100 100" aria-hidden="true">
-                    <use href="#bellShape" fill="url(#glassBody)"/>
+                    <ellipse class="bell-caustic" cx="50" cy="86" rx="24" ry="5" filter="url(#irid)"/>
+                    <use href="#bellShape" class="bell-body"/>
                     <g clip-path="url(#bellClip)" filter="url(#irid)">
-                        <ellipse cx="34" cy="40" rx="20" ry="16" fill="#ffb3d1" opacity=".55"/>
-                        <ellipse cx="66" cy="48" rx="18" ry="20" fill="#9ee8ff" opacity=".5"/>
-                        <ellipse cx="50" cy="68" rx="24" ry="10" fill="#fff3a6" opacity=".5"/>
-                        <ellipse cx="28" cy="64" rx="12" ry="10" fill="#d5b8ff" opacity=".45"/>
+                        <ellipse class="tint tint-1" cx="32" cy="46" rx="20" ry="16"/>
+                        <ellipse class="tint tint-2" cx="58" cy="62" rx="22" ry="12"/>
+                        <ellipse class="tint tint-3" cx="68" cy="30" rx="16" ry="14"/>
+                        <ellipse class="tint tint-4" cx="30" cy="66" rx="14" ry="9"/>
                     </g>
-                    <use href="#bellShape" fill="none" stroke="#ffffff" stroke-opacity=".85" stroke-width="1.4"/>
-                    <line x1="50" y1="14" x2="50" y2="100" stroke="#ffffff" stroke-opacity=".85" stroke-width="1"/>
-                    <circle cx="50" cy="72" r="3.6" fill="#ffffff" fill-opacity=".85"/>
-                    <ellipse cx="50" cy="78" rx="32" ry="5" fill="#ffffff" fill-opacity=".22" stroke="#ffffff" stroke-opacity=".9" stroke-width="1.2"/>
-                    <path d="M27 34 C31 25 38 20 45 18" fill="none" stroke="#ffffff" stroke-width="3" stroke-linecap="round" opacity=".9"/>
-                    <circle cx="70" cy="30" r="2.2" fill="#ffffff" opacity=".9"/>
-                    <circle cx="50" cy="11" r="4" fill="#ffffff" fill-opacity=".9"/>
+                    <use href="#bellShape" class="bell-edge" fill="none" stroke-width="1.4"/>
+                    <line x1="50" y1="14" x2="50" y2="100" class="bell-line" stroke-width="1"/>
+                    <circle cx="50" cy="72" r="3.6" class="bell-bead"/>
+                    <ellipse cx="50" cy="78" rx="32" ry="5" class="bell-rim" stroke-width="1.2"/>
+                    <!-- reflections face the moon / sun (top right); script.js keeps them pointed there as the chime swings -->
+                    <g class="bell-spec">
+                        <path d="M56 18 C64 20 71 25 75 33" fill="none" stroke-width="3.2" stroke-linecap="round"/>
+                        <circle cx="78" cy="40" r="2.4"/>
+                        <path class="glint-star" d="M70 12 Q71 22 80 23 Q71 24 70 34 Q69 24 60 23 Q69 22 70 12Z"/>
+                        <path d="M22 50 C22 42 25 35 29 30" fill="none" stroke-width="1.6" stroke-linecap="round" class="spec-soft"/>
+                    </g>
+                    <circle cx="50" cy="11" r="4" class="bell-knob"/>
                 </svg>
                 <span class="chime-cord"></span>
                 <span class="chime-strip"><span class="chime-label">Publications</span></span>

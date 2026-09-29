@@ -552,6 +552,7 @@ document.querySelectorAll('.bib-toggle').forEach((btn) => {
     const state = chimes.map((el, i) => ({
         el,
         strip: el.querySelector('.chime-strip'),
+        spec: el.querySelector('.bell-spec'),
         note: parseFloat(el.dataset.note) || 1200,
         a: 0, v: 0,   // chime angle / velocity (radians, per frame)
         s: 0, sv: 0,  // strip angle relative to the bell
@@ -624,6 +625,8 @@ document.querySelectorAll('.bib-toggle').forEach((btn) => {
             c.sv += sacc;
             c.s += c.sv;
             if (c.ready) c.el.style.transform = `rotate(${c.a}rad)`;
+            // counter-rotate the glints so they stay facing the moon / sun
+            if (c.ready) c.spec.setAttribute('transform', `rotate(${(-c.a * 180) / Math.PI} 50 50)`);
             c.strip.style.transform = `rotate(${c.s}rad)`;
         });
         raf = visible && !document.hidden ? requestAnimationFrame(frame) : 0;

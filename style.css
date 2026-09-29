@@ -44,6 +44,19 @@
     --strip-a: #f6cbd8;
     --strip-b: #fff7fa;
     --strip-ink: #8a3a57;
+
+    /* moonlit glass */
+    --bell-body: url(#glassNight);
+    --tint-1: rgba(184, 198, 255, 0.55);
+    --tint-2: rgba(243, 198, 218, 0.45);
+    --tint-3: rgba(243, 227, 174, 0.6);
+    --tint-4: rgba(201, 184, 240, 0.45);
+    --bell-edge: rgba(226, 234, 255, 0.85);
+    --bell-spec: #fff8e2;
+    --bell-spec-soft: rgba(210, 222, 255, 0.55);
+    --bell-caustic: rgba(190, 205, 255, 0.35);
+    --glint: 0.55;
+    --bell-glow: drop-shadow(0 0 10px rgba(200, 215, 255, 0.45)) drop-shadow(0 6px 14px rgba(40, 50, 80, 0.2));
 }
 
 /* Summer daylight: sunny greens with fresh leaf and lime accents */
@@ -91,6 +104,19 @@
     --strip-a: #cfe9a8;
     --strip-b: #fbfff4;
     --strip-ink: #2f6f34;
+
+    /* sunlit glass */
+    --bell-body: url(#glassDay);
+    --tint-1: rgba(255, 226, 90, 0.8);
+    --tint-2: rgba(255, 170, 200, 0.5);
+    --tint-3: rgba(255, 255, 250, 1);
+    --tint-4: rgba(110, 210, 255, 0.65);
+    --bell-edge: #ffffff;
+    --bell-spec: #ffffff;
+    --bell-spec-soft: rgba(255, 246, 190, 0.95);
+    --bell-caustic: rgba(255, 240, 150, 0.95);
+    --glint: 1;
+    --bell-glow: drop-shadow(0 0 6px rgba(255, 255, 255, 0.9)) drop-shadow(0 0 20px rgba(255, 244, 180, 0.9)) drop-shadow(0 8px 14px rgba(40, 90, 40, 0.2));
 }
 
 * { box-sizing: border-box; }
@@ -293,9 +319,37 @@ body {
     height: var(--bell);
     margin-top: calc(var(--bell) * -0.1);
     overflow: visible;
-    filter: drop-shadow(0 6px 14px rgba(40, 50, 80, 0.18));
-    transition: filter 0.4s ease, transform 0.4s ease;
+    filter: var(--bell-glow);
+    transition: filter 0.6s ease, transform 0.4s ease;
 }
+
+.bell-body { fill: var(--bell-body); }
+.tint { transition: fill 0.9s ease; }
+.tint-1 { fill: var(--tint-1); }
+.tint-2 { fill: var(--tint-2); }
+.tint-3 { fill: var(--tint-3); }
+.tint-4 { fill: var(--tint-4); }
+.bell-edge,
+.bell-line { stroke: var(--bell-edge); }
+.bell-bead,
+.bell-knob { fill: var(--bell-edge); }
+.bell-rim { fill: rgba(255, 255, 255, 0.2); stroke: var(--bell-edge); }
+.bell-spec { stroke: var(--bell-spec); fill: var(--bell-spec); }
+.bell-spec .spec-soft { stroke: var(--bell-spec-soft); }
+.bell-caustic { fill: var(--bell-caustic); transition: fill 0.9s ease; }
+
+.glint-star {
+    stroke: none;
+    opacity: var(--glint);
+    transform-box: fill-box;
+    transform-origin: center;
+    animation: glint 3.2s ease-in-out infinite;
+}
+
+.chime:nth-child(2) .glint-star { animation-delay: -1.1s; }
+.chime:nth-child(3) .glint-star { animation-delay: -2.2s; }
+
+[data-theme="day"] .bell-spec { filter: drop-shadow(0 0 3px #ffffff) drop-shadow(0 0 6px #fff6c8); }
 
 .chime-cord {
     width: 1.2px;
@@ -330,7 +384,7 @@ body {
 
 .chime:hover .chime-bell,
 .chime:focus-visible .chime-bell {
-    filter: drop-shadow(0 0 16px rgba(255, 255, 255, 0.9)) drop-shadow(0 6px 14px rgba(40, 50, 80, 0.18));
+    filter: drop-shadow(0 0 16px rgba(255, 255, 255, 0.9)) var(--bell-glow);
 }
 
 .chime:hover .chime-strip,
@@ -1119,6 +1173,11 @@ html.theme-anim .page *::after {
 @keyframes chimeDrop {
     from { opacity: 0; transform: translateY(-60px) rotate(4deg); }
     to { opacity: 1; transform: none; }
+}
+
+@keyframes glint {
+    0%, 100% { transform: scale(0.6) rotate(0deg); }
+    50% { transform: scale(1.1) rotate(20deg); }
 }
 
 @keyframes cue {
