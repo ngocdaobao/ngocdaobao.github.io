@@ -23,7 +23,7 @@ document.querySelectorAll('.bib-toggle').forEach((btn) => {
 });
 
 
-// ---------- sky: sakura at night; sakura and green leaves in the blossom pavilion ----------
+// ---------- sky: sakura at night; sakura, green leaves and bubbles on a summer day ----------
 (function sky() {
     const root = document.documentElement;
     const back = document.getElementById('sky-back');
@@ -48,7 +48,7 @@ document.querySelectorAll('.bib-toggle').forEach((btn) => {
         ['#a8d88e', '#3f7d4a'],
         ['#e9f2a6', '#a9c95a'],
     ];
-    // brighter, coral-pink blossoms of the sunlit pavilion
+    // brighter, sunlit sakura for the daytime
     const DAY_SAKURA = [
         ['#ffe6e9', '#f59aa8'],
         ['#ffd9de', '#f28b9b'],
@@ -57,7 +57,7 @@ document.querySelectorAll('.bib-toggle').forEach((btn) => {
     ];
 
     let W = 0, H = 0, DPR = 1;
-    let petalsBack = [], petalsFront = [], stars = [], motes = [], streaks = [];
+    let petalsBack = [], petalsFront = [], stars = [], motes = [], streaks = [], bubbles = [];
     let wind = 0, windTarget = 0, t = 0;
     let theme = root.dataset.theme === 'day' ? 'day' : 'night';
     let dayMix = theme === 'day' ? 1 : 0; // eases 0 (night) → 1 (day) for the sky details
@@ -86,7 +86,7 @@ document.querySelectorAll('.bib-toggle').forEach((btn) => {
     function makePetal(isFront, x, y) {
         let kind = 'sakura', tint = pick(SAKURA), size = isFront ? rand(14, 22) : rand(7, 14);
         if (theme === 'day') {
-            if (Math.random() < 0.4) {
+            if (Math.random() < 0.5) {
                 kind = 'leaf';
                 tint = pick(LEAVES);
                 size = isFront ? rand(18, 26) : rand(10, 17);
@@ -137,6 +137,80 @@ document.querySelectorAll('.bib-toggle').forEach((btn) => {
             twinkle: rand(0.01, 0.03),
             phase: rand(0, Math.PI * 2),
         }));
+    }
+
+    // soap bubbles drifting up through the sunlight
+    function makeBubble(y) {
+        const big = Math.random() < 0.28;
+        return {
+            x: rand(0, W),
+            y: y ?? H + rand(20, 200),
+            r: big ? rand(16, 38) : rand(4, 13),
+            vy: -rand(0.25, 0.7),
+            phase: rand(0, Math.PI * 2),
+            hue: rand(0, 360),
+            pop: 0,
+        };
+    }
+
+    function stepBubble(b) {
+        if (b.pop) {
+            b.pop += 1 / 18;
+            if (b.pop >= 1) Object.assign(b, makeBubble());
+            return;
+        }
+        b.y += b.vy;
+        b.x += Math.sin(t * 0.012 + b.phase) * 0.35 + wind * 0.3;
+        b.hue += 0.4;
+        const dx = b.x - mouse.x, dy = b.y - mouse.y;
+        if (dayMix > 0.5 && dx * dx + dy * dy < (b.r + 6) * (b.r + 6)) b.pop = 0.001;
+        if (b.y < -b.r - 20 || b.x < -60 || b.x > W + 60) Object.assign(b, makeBubble());
+    }
+
+    function drawBubble(ctx, b, fade) {
+        const { x, y, r } = b;
+        if (b.pop) {
+            const k = b.pop;
+            ctx.globalAlpha = (1 - k) * fade;
+            ctx.strokeStyle = '#ffffff';
+            ctx.lineWidth = 1.2;
+            ctx.beginPath();
+            ctx.arc(x, y, r * (1 + k * 0.5), 0, Math.PI * 2);
+            ctx.setLineDash([2, 5]);
+            ctx.stroke();
+            ctx.setLineDash([]);
+            return;
+        }
+        ctx.globalAlpha = fade;
+        const body = ctx.createRadialGradient(x - r * 0.3, y - r * 0.3, r * 0.1, x, y, r);
+        body.addColorStop(0, 'rgba(255, 255, 255, 0.04)');
+        body.addColorStop(0.72, 'rgba(255, 255, 255, 0.08)');
+        body.addColorStop(0.92, 'rgba(255, 255, 255, 0.4)');
+        body.addColorStop(1, 'rgba(255, 255, 255, 0.75)');
+        ctx.fillStyle = body;
+        ctx.beginPath();
+        ctx.arc(x, y, r, 0, Math.PI * 2);
+        ctx.fill();
+
+        // iridescent rim
+        const rim = ctx.createLinearGradient(x - r, y - r, x + r, y + r);
+        rim.addColorStop(0, `hsla(${b.hue}, 90%, 82%, 0.7)`);
+        rim.addColorStop(0.5, `hsla(${b.hue + 120}, 90%, 85%, 0.5)`);
+        rim.addColorStop(1, `hsla(${b.hue + 240}, 90%, 82%, 0.7)`);
+        ctx.strokeStyle = rim;
+        ctx.lineWidth = Math.max(1, r * 0.06);
+        ctx.stroke();
+
+        // highlights
+        ctx.fillStyle = 'rgba(255, 255, 255, 0.85)';
+        ctx.beginPath();
+        ctx.ellipse(x - r * 0.42, y - r * 0.42, r * 0.2, r * 0.1, -Math.PI / 4, 0, Math.PI * 2);
+        ctx.fill();
+        ctx.strokeStyle = 'rgba(255, 255, 255, 0.6)';
+        ctx.lineWidth = Math.max(0.8, r * 0.05);
+        ctx.beginPath();
+        ctx.arc(x, y, r * 0.78, Math.PI * 0.1, Math.PI * 0.4);
+        ctx.stroke();
     }
 
     // a sakura petal: rounded teardrop with the signature notch at the tip
@@ -299,6 +373,10 @@ document.querySelectorAll('.bib-toggle').forEach((btn) => {
         const y = () => (fromTop ? rand(-H * 0.9, -10) : rand(-H, H));
         petalsBack = Array.from({ length: n.back }, () => makePetal(false, undefined, y()));
         petalsFront = Array.from({ length: n.front }, () => makePetal(true, undefined, y()));
+        if (!bubbles.length) {
+            const nb = Math.max(10, Math.min(26, Math.round((W * H) / 60000)));
+            bubbles = Array.from({ length: nb }, () => makeBubble(rand(0, H)));
+        }
     }
 
     function drawSkyDetails(ctx) {
@@ -323,6 +401,9 @@ document.querySelectorAll('.bib-toggle').forEach((btn) => {
         streaks = streaks.filter((s) => ++s.life < s.max);
         streaks.forEach((s) => drawStreak(ctxB, s));
 
+        bubbles.forEach(stepBubble);
+        if (dayMix > 0.01) bubbles.forEach((b) => drawBubble(b.r > 20 ? ctxF : ctxB, b, dayMix));
+
         petalsBack.forEach((p) => { step(p); drawPetal(ctxB, p); });
         petalsFront.forEach((p) => { step(p); drawPetal(ctxF, p); });
         recycle(petalsBack, false);
@@ -334,12 +415,13 @@ document.querySelectorAll('.bib-toggle').forEach((btn) => {
         rafId = requestAnimationFrame(frame);
     }
 
-    // a still scene: stars or sun motes and a few resting petals
+    // a still scene: stars or sun motes, bubbles, and a few resting petals
     function drawStill() {
         dayMix = theme === 'day' ? 1 : 0;
         ctxB.clearRect(0, 0, W, H);
         ctxF.clearRect(0, 0, W, H);
         drawSkyDetails(ctxB);
+        if (theme === 'day') bubbles.filter((b) => !b.pop).forEach((b) => drawBubble(b.r > 20 ? ctxF : ctxB, b, 1));
         petalsBack.filter((p) => p.y > 0 && p.y < H).slice(0, 14).forEach((p) => drawPetal(ctxB, p));
         ctxB.globalAlpha = 1;
         ctxF.globalAlpha = 1;
@@ -376,7 +458,7 @@ document.querySelectorAll('.bib-toggle').forEach((btn) => {
         root.dataset.theme = next;
         const day = next === 'day';
         themeToggle.setAttribute('aria-checked', String(day));
-        themeToggle.title = day ? 'Switch to cherry-blossom night' : 'Switch to the sunlit blossom pavilion';
+        themeToggle.title = day ? 'Switch to cherry-blossom night' : 'Switch to summer daylight';
         updatePetalLabel();
         if (!animate) return;
 
